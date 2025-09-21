@@ -135,7 +135,12 @@
                   </li>
                   <li><i class="fas fa-headset"></i> Priority email support</li>
                 </ul>
-                <button class="plan-btn" data-plan="personal-pro">
+                <button
+                  class="plan-btn"
+                  data-plan="personal-pro"
+                  type="submit"
+                  onclick="payhereGateway()"
+                >
                   <i class="fas fa-arrow-right me-2"></i>Upgrade to Pro
                 </button>
               </div>
@@ -179,7 +184,12 @@
                   <li><i class="fas fa-sync"></i> Automated savings rules</li>
                   <li><i class="fas fa-phone"></i> Premium phone support</li>
                 </ul>
-                <button class="plan-btn" data-plan="personal-elite">
+                <button
+                  class="plan-btn"
+                  data-plan="personal-elite"
+                  type="submit"
+                  onclick="payhereGateway()"
+                >
                   <i class="fas fa-diamond me-2"></i>Go Elite
                 </button>
               </div>
@@ -494,10 +504,15 @@
         </div>
       </div>
     </div>
+    <script
+      type="text/javascript"
+      src="https://www.payhere.lk/lib/payhere.js"
+    ></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
     <script src="/js/subscription-plan.js"></script>
+    <script src="/js/payment.js"></script>
   </body>
 </html>

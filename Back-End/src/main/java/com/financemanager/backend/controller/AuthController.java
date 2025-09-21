@@ -34,7 +34,7 @@ public class AuthController {
     private long refreshTokenExpiration;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<APIResponse<AuthenticationResponse>> authenticate(@Valid @RequestBody AuthenticationRequest request, HttpServletResponse response) {
+    public ResponseEntity<APIResponse<AuthenticationResponse>> authenticate( @RequestBody AuthenticationRequest request, HttpServletResponse response) {
         AuthenticationResponse tokens = authService.authenticate(request);
         createCookie(tokens, response);
         return  ResponseEntity.ok(new APIResponse<>(
@@ -48,7 +48,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<APIResponse<AuthenticationResponse>> register(@Valid @RequestBody RegistrationRequest request, HttpServletResponse response) {
+    public ResponseEntity<APIResponse<AuthenticationResponse>> register(@RequestBody RegistrationRequest request, HttpServletResponse response) {
         AuthenticationResponse tokens = authService.register(request);
         createCookie(tokens, response);
         return  ResponseEntity.ok(new APIResponse<>(
