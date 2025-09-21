@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finance App</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="/index.html">
+            <i class="fas fa-chart-line me-2"></i>Finance Flow
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#features">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#pricing">Pricing</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+              </li>
+            </ul>
+
+            <div class="auth-buttons">
+              <a href="/pages/sign-in.html" class="btn-signin">Sign In</a>
+              <a href="/pages/sign-up.html" class="btn-signup">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-6">
+              <div class="hero-content">
+                <h1>Take Control of Your Finantial Future</h1>
+                <p>
+                  StremStreamline your finances with AI-powered insights, smart
+                  budgeting, and real-time tracking. Join thousands who've
+                  transformed their financial health.line
+                </p>
+                <!-- 
+                <div class="user-type-selector">
+                  <div class="type-toggle">
+                    <button class="type-option active" data-type="personal">
+                      <i class="fas fa-user me-2"></i>Personal
+                    </button>
+                    <button class="type-option" data-type="business">
+                      <i class="fas fa-building me-2"></i>Business
+                    </button>
+                  </div>
+                </div> -->
+
+                <div class="cta-buttons" id="heroButtons">
+                  <a
+                    href="/pages/sign-up.html"
+                    class="btn btn-primary"
+                    id="primaryCTA"
+                  >
+                    <i class="fas fa-user-plus me-2"></i>Sign Up Today
+                  </a>
+                  <!-- <a href="#" class="btn btn-outline">
+                    <i class="fas fa-play me-2"></i>Watch Demo
+                  </a> -->
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="hero-image text-center">
+                <img src="/assets/hero-image.png" alt="" style="width: 100%" />
+                <!-- <div class="glass" style="padding: 2rem; display: inline-block">
+                  <i
+                    class="fas fa-mobile-alt"
+                    style="
+                      font-size: 200px;
+                      background: var(--accent-gradient);
+                      -webkit-background-clip: text;
+                      -webkit-text-fill-color: transparent;
+                      background-clip: text;
+                    "
+                  ></i>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="features">
+        <div class="container">
+          <div class="text-center mb-5 fade-in">
+            <h2
+              style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem"
+            >
+              Powerful Features for Smart Money Management
+            </h2>
+            <p style="font-size: 1.25rem; color: var(--text-secondary)">
+              Everything you need to master your finances in one place
+            </p>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-md-6 fade-in">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered Insights</h3>
+                <p>
+                  Get personalized financial recommendations and spending
+                  predictions powered by advanced machine learning algorithms.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 fade-in">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Smart Budgeting</h3>
+                <p>
+                  Create dynamic budgets that adapt to your lifestyle with
+                  automatic categorization and spending limit alerts.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 fade-in">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Real-Time Sync</h3>
+                <p>
+                  Connect all your accounts and get instant updates across all
+                  your financial institutions and investment platforms.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 fade-in">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Bank-Level Security</h3>
+                <p>
+                  Your data is protected with 256-bit encryption and
+                  multi-factor authentication for complete peace of mind.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 fade-in">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-target"></i>
+                </div>
+                <h3>Goal Tracking</h3>
+                <p>
+                  Set and achieve financial goals with visual progress tracking
+                  and milestone celebrations.
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 fade-in">
+              <div class="feature-card">
+                <div class="feature-icon">
+                  <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile First</h3>
+                <p>
+                  Manage your finances on-the-go with our award-winning mobile
+                  app available on iOS and Android.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Section -->
+      <section class="container">
+        <div class="stats fade-in">
+          <div class="row">
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Active Users</div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-item">
+                <div class="stat-number">$2.5B</div>
+                <div class="stat-label">Money Managed</div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Satisfaction Rate</div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support Available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="container">
+        <div class="cta fade-in">
+          <div class="cta-content">
+            <h2>Ready to Transform Your Financial Life?</h2>
+            <p
+              style="
+                font-size: 1.25rem;
+                color: var(--text-secondary);
+                margin-bottom: 2rem;
+              "
+            >
+              Join thousands of users who've already taken control of their
+              finances. Get Started Today
+            </p>
+            <div
+              style="
+                display: flex;
+                gap: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+              "
+            >
+              <a
+                href="/pages/sign-up.html?type=personal"
+                class="btn btn-primary"
+              >
+                <i class="fas fa-user-plus me-2"></i>Personal Sign Up
+              </a>
+              <a
+                href="/pages/sign-up.html?type=business"
+                class="btn btn-primary business"
+              >
+                <i class="fas fa-briefcase me-2"></i>Business Sign Up
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <h5 style="margin-bottom: 1rem">FinanceFlow</h5>
+            <p style="color: var(--text-secondary)">
+              Empowering individuals to make smarter financial decisions through
+              innovative technology.
+            </p>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 style="margin-bottom: 1rem">Product</h6>
+            <ul class="list-unstyled">
+              <li><a href="#" class="footer-links">Features</a></li>
+              <li><a href="#" class="footer-links">Pricing</a></li>
+              <li><a href="#" class="footer-links">Security</a></li>
+              <li><a href="#" class="footer-links">Updates</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 style="margin-bottom: 1rem">Company</h6>
+            <ul class="list-unstyled">
+              <li><a href="#" class="footer-links">About</a></li>
+              <li><a href="#" class="footer-links">Careers</a></li>
+              <li><a href="#" class="footer-links">Press</a></li>
+              <li><a href="#" class="footer-links">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 style="margin-bottom: 1rem">Resources</h6>
+            <ul class="list-unstyled">
+              <li><a href="#" class="footer-links">Blog</a></li>
+              <li><a href="#" class="footer-links">Help Center</a></li>
+              <li><a href="#" class="footer-links">API Docs</a></li>
+              <li><a href="#" class="footer-links">Community</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <h6 style="margin-bottom: 1rem">Legal</h6>
+            <ul class="list-unstyled">
+              <li><a href="#" class="footer-links">Privacy</a></li>
+              <li><a href="#" class="footer-links">Terms</a></li>
+              <li><a href="#" class="footer-links">Cookies</a></li>
+              <li><a href="#" class="footer-links">Licenses</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr style="border-color: var(--glass-border); margin: 2rem 0 1rem" />
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p style="color: var(--text-secondary); margin: 0">
+              &copy; 2025 FinanceFlow. All rights reserved.
+            </p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <div class="social-links">
+              <a href="#" class="footer-links me-3"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="footer-links me-3"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" class="footer-links me-3"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="footer-links"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/index.js"></script>
+  </body>
+</html>

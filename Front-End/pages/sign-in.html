@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - FinanceFlow</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-card glass">
+        <div class="auth-header">
+          <div class="logo">
+            <a href="/index.html"
+              ><i class="fas fa-chart-line me-2"></i>FinanceFlow</a
+            >
+          </div>
+          <h1 class="auth-title" id="formTitle">Welcome Back</h1>
+          <p class="auth-subtitle" id="formSubtitle">
+            Sign in to continue to your dashboard
+          </p>
+        </div>
+
+        <form class="form-signin" id="signin-form">
+          <div class="social-login">
+            <a href="#" class="btn-social btn-google">
+              <i class="fab fa-google"></i>
+              Continue with Google
+            </a>
+            <a href="#" class="btn-social btn-apple">
+              <i class="fab fa-apple"></i>
+              Continue with Apple
+            </a>
+          </div>
+
+          <div class="divider">
+            <span>or</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="john@example.com"
+              id="email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <div class="password-input">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="Enter your password"
+                id="password"
+                required
+              />
+              <span class="password-validation-icon"></span>
+              <button type="button" class="password-toggle">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-check d-none">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="rememberCheck"
+            />
+            <label class="form-check-label" for="rememberCheck">
+              Remember me for 30 days
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Sign In</button>
+
+          <div class="text-center mb-3">
+            <a href="#" class="toggle-link">Forgot your password?</a>
+          </div>
+
+          <div class="form-toggle">
+            <p>Don't have an account?</p>
+            <a href="/pages/sign-up.html" class="toggle-link">Create one now</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/auth-common.js"></script>
+    <script src="/js/sign-in.js"></script>
+  </body>
+</html>

@@ -1,0 +1,477 @@
+:root {
+  --free-gradient: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(79, 172, 254, 0.6);
+  }
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+}
+
+.main-container {
+  padding: 60px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 60px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.header-section h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.header-section p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.plan-type-toggle {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease-out;
+  animation-delay: 0.2s;
+}
+
+.type-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 50px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.type-option {
+  padding: 12px 30px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  position: relative;
+  z-index: 2;
+  color: var(--text-secondary);
+}
+
+.type-option.active {
+  color: white;
+}
+
+.type-slider {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  bottom: 8px;
+  width: calc(50% - 8px);
+  background: var(--accent-gradient);
+  border-radius: 40px;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.type-slider.business {
+  transform: translateX(100%);
+}
+
+.plan-card {
+  position: relative;
+  padding: 40px 30px;
+  margin-bottom: 30px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: fadeInUp 0.8s ease-out;
+  cursor: pointer;
+  height: 100%;
+  border: 1px solid var(--glass-border);
+}
+
+.plan-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.plan-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.plan-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.plan-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+}
+
+.plan-card.popular {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--dark-bg), var(--dark-bg)) padding-box,
+    var(--accent-gradient) border-box;
+  animation: glow 3s ease-in-out infinite;
+}
+
+.popular-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent-gradient);
+  color: white;
+  padding: 8px 25px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.free-badge {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--free-gradient);
+  color: white;
+  padding: 8px 25px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.plan-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 18px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.free-plan .plan-icon {
+  background: var(--free-gradient);
+}
+
+.basic-plan .plan-icon {
+  background: var(--primary-gradient);
+}
+
+.pro-plan .plan-icon {
+  background: var(--accent-gradient);
+}
+
+.business-plan .plan-icon {
+  background: var(--business-gradient);
+}
+
+.plan-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.plan-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.plan-price {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.price-amount {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.free-price {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--free-gradient);
+  background: var(--free-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.price-period {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-top: 5px;
+}
+
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.plan-features li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.plan-features li i {
+  color: #4ade80;
+  margin-right: 12px;
+  font-size: 1.1rem;
+}
+
+.plan-features li.limited i {
+  color: #fbbf24;
+}
+
+.plan-btn {
+  width: 100%;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.plan-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.plan-btn:hover::before {
+  left: 100%;
+}
+
+.free-plan .plan-btn {
+  background: var(--free-gradient);
+  color: white;
+}
+
+.basic-plan .plan-btn {
+  background: var(--primary-gradient);
+  color: white;
+}
+
+.pro-plan .plan-btn {
+  background: var(--accent-gradient);
+  color: white;
+}
+
+.business-plan .plan-btn {
+  background: var(--business-gradient);
+  color: white;
+}
+
+.plan-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.billing-toggle {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.billing-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+}
+
+.switch {
+  position: relative;
+  width: 60px;
+  height: 30px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glass-border);
+  transition: 0.4s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background: var(--accent-gradient);
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px);
+}
+
+.save-badge {
+  background: var(--secondary-gradient);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.plans-section {
+  display: none;
+}
+
+.plans-section.active {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .header-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .plan-card {
+    padding: 30px 20px;
+  }
+
+  .price-amount {
+    font-size: 2.8rem;
+  }
+
+  .type-option {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+.payment-option {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.payment-option:hover {
+  border-color: var(--accent-gradient);
+  transform: translateY(-2px);
+}
+
+.payment-option.selected {
+  border: 2px solid;
+  border-image: var(--accent-gradient) 1;
+  background: rgba(79, 172, 254, 0.1);
+}
+
+.modal-content.glass {
+  backdrop-filter: blur(20px);
+}
+
+.form-control.glass {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+}
+
+.form-control.glass::placeholder {
+  color: var(--text-secondary);
+}
+
+.form-control.glass:focus {
+  background: var(--glass-bg);
+  border-color: var(--accent-gradient);
+  box-shadow: 0 0 0 0.25rem rgba(79, 172, 254, 0.25);
+  color: var(--text-primary);
+}
+
+.selected-plan-summary {
+  border: 1px solid var(--glass-border);
+}

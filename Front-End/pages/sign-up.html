@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - FinanceFlow</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.1/build/css/intlTelInput.css"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-card glass">
+        <div class="auth-header">
+          <div class="logo">
+            <a href="/index.html"
+              ><i class="fas fa-chart-line me-2"></i>FinanceFlow</a
+            >
+          </div>
+          <h1 class="auth-title" id="formTitle">Choose Your Account Type</h1>
+          <p class="auth-subtitle" id="formSubtitle">
+            Select how you'll be using FinanceFlow
+          </p>
+        </div>
+
+        <div class="form-step active" id="step1">
+          <div class="account-type-selector">
+            <div class="account-type-grid">
+              <div class="account-type-option personal" data-type="personal">
+                <div class="account-type-icon">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="account-type-title">Personal</div>
+                <div class="account-type-description">
+                  Manage your personal finances, budgets, and goals
+                </div>
+              </div>
+              <div class="account-type-option business" data-type="business">
+                <div class="account-type-icon">
+                  <i class="fas fa-building"></i>
+                </div>
+                <div class="account-type-title">Business</div>
+                <div class="account-type-description">
+                  Track business expenses, invoices, and cash flow
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            id="continueBtn"
+            disabled
+          >
+            Continue
+          </button>
+
+          <div class="form-toggle">
+            <p>Already have an account?</p>
+            <a href="/pages/sign-in.html" class="toggle-link">
+              Sign in instead
+            </a>
+          </div>
+        </div>
+
+        <div class="form-step" id="step2">
+          <form class="form-signup" id="signupForm">
+            <div class="social-login">
+              <a href="#" class="btn-social btn-google">
+                <i class="fab fa-google"></i>
+                Continue with Google
+              </a>
+              <a href="#" class="btn-social btn-apple">
+                <i class="fab fa-apple"></i>
+                Continue with Apple
+              </a>
+            </div>
+
+            <div class="divider">
+              <span id="dividerText">or</span>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" id="firstNameLabel"
+                    >First Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="John"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label" id="lastNameLabel">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Doe"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Business specific fields -->
+            <div class="business-fields" id="businessFields">
+              <div class="form-group">
+                <label class="form-label">Business Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="businessName"
+                  placeholder="Your Business Name"
+                />
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Industry</label>
+                    <select class="form-control" id="industry">
+                      <option value="">Select Industry</option>
+                      <option value="retail">Retail</option>
+                      <option value="services">Services</option>
+                      <option value="consulting">Consulting</option>
+                      <option value="tech">Technology</option>
+                      <option value="restaurant">Restaurant</option>
+                      <option value="healthcare">Healthcare</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="form-label">Business Size</label>
+                    <select class="form-control" id="businessSize">
+                      <option value="">Select Size</option>
+                      <option value="solo">Just me</option>
+                      <option value="small">2-10 employees</option>
+                      <option value="medium">11-50 employees</option>
+                      <option value="large">50+ employees</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="phoneNumberInput" class="form-label"
+                >Phone Number</label
+              >
+              <input
+                type="tel"
+                id="phoneNumberInput"
+                class="form-control text-black"
+                placeholder="Enter your phone number"
+              />
+              <!-- <small class="form-text text-info"
+                >Enter with country code (e.g., +94771234567 for Sri
+                Lanka)</small
+              > -->
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="john@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Password</label>
+              <div class="password-input">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Create a strong password"
+                  required
+                />
+                <span class="password-validation-icon"></span>
+
+                <button type="button" class="password-toggle">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Confirm Password</label>
+              <div class="password-input">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  placeholder="Confirm your password"
+                  required
+                />
+                <span class="password-validation-icon"></span>
+                <button type="button" class="password-toggle">
+                  <i class="fas fa-eye"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="termsCheck"
+                required
+              />
+              <label class="form-check-label" for="termsCheck">
+                I agree to the <a href="#">Terms of Service</a> and
+                <a href="#">Privacy Policy</a>
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="newsletterCheck"
+              />
+              <label
+                class="form-check-label"
+                for="newsletterCheck"
+                id="newsletterLabel"
+              >
+                Send me financial tips and product updates
+              </label>
+            </div>
+
+            <div class="button-group">
+              <button type="button" class="btn-back" onclick="goBack()">
+                <i class="fas fa-arrow-left me-2"></i>Back
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="createAccountBtn"
+              >
+                Create Account
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.10.1/build/js/intlTelInput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/auth-common.js"></script>
+    <script src="/js/sign-up.js"></script>
+  </body>
+</html>

@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Report FinanceFlow</title>
+  </head>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="/css/report.css" />
+  <body>
+    <div class="app-container">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-name">
+            <a href="/pages/dashboard.html"
+              ><i class="fas fa-chart-line me-2 flex-wrap"></i>FinanceFlow<i
+                class="fas fa-crown premium-crown"
+              ></i
+            ></a>
+          </div>
+        </div>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="/pages/dashboard.html" class="nav-link">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/financial-account.html" class="nav-link">
+              <i class="fas fa-wallet"></i>
+              <span>Accounts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/transaction.html" class="nav-link">
+              <i class="fas fa-exchange-alt"></i>
+              <span>Transactions</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/categories-and-tags.html" class="nav-link">
+              <i class="fas fa-layer-group"></i>
+              <span>Categories & Tags</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/budget.html" class="nav-link">
+              <i class="fas fa-chart-pie"></i>
+              <span>Budget</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/analytics.html" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/report.html" class="nav-link active">
+              <i class="fas fa-file-invoice"></i>
+              <span>Reports</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/setting.html" class="nav-link">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="upgrade-container">
+          <a href="/pages/subscription-plans.html" class="btn-upgrade">
+            <i class="fas fa-crown"></i>
+            Upgrade to Premium
+          </a>
+        </div>
+
+        <div class="sidebar-footer">
+          <a href="#" class="nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Help & Support</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-bar justify-content-lg-end">
+          <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="user-profile">
+            <button class="theme-toggle" id="themeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <div class="user-avatar">JD</div>
+
+            <div class="dropdown-menu profile-dropdown">
+              <div class="dropdown-header">
+                <div class="user-info">
+                  <div class="user-name">John Doe</div>
+                  <div class="user-email">john.doe@example.com</div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="/pages/user-profile.html" class="dropdown-item">
+                <i class="fas fa-user me-2"></i>Profile
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-cog me-2"></i>Settings
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-lock me-2"></i>Privacy
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <div class="content-container w-100 px-lg-5 px-sm-4">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Reports & Insights</h1>
+              <p class="page-subtitle">
+                Visualize your financial trends and make smarter decisions.
+              </p>
+            </div>
+            <button class="btn-add d-none" onclick="openModal('add')">
+              <i class="fas fa-plus"></i>
+              Add New Account
+            </button>
+          </div>
+
+          <div class="accounts-grid d-flex flex-column" id="accountsGrid">
+            <!-- Report Generation Dashboard -->
+            <div class="reports-dashboard">
+              <!-- Report Types Section -->
+              <div class="report-types-section">
+                <div class="section-header">
+                  <h2>Generate Reports</h2>
+                  <div class="report-actions">
+                    <button class="btn-secondary" id="scheduleReport">
+                      <i class="fas fa-clock"></i>
+                      Schedule Reports
+                    </button>
+                    <button class="btn-add" id="customReport">
+                      <i class="fas fa-chart-bar"></i>
+                      Custom Report
+                    </button>
+                  </div>
+                </div>
+
+                <div class="report-types-grid">
+                  <div class="report-type-card" data-report="financial-summary">
+                    <div class="report-icon">
+                      <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="report-details">
+                      <h3>Financial Summary</h3>
+                      <p>Overview of income, expenses, and account balances</p>
+                      <div class="report-options">
+                        <span class="report-format">PDF, Excel, CSV</span>
+                        <span class="report-period"
+                          >Monthly, Quarterly, Yearly</span
+                        >
+                      </div>
+                    </div>
+                    <button
+                      class="btn-generate"
+                      data-report="financial-summary"
+                    >
+                      <i class="fas fa-download"></i>
+                      Generate
+                    </button>
+                  </div>
+
+                  <div
+                    class="report-type-card"
+                    data-report="transaction-history"
+                  >
+                    <div class="report-icon">
+                      <i class="fas fa-list-alt"></i>
+                    </div>
+                    <div class="report-details">
+                      <h3>Transaction History</h3>
+                      <p>Detailed list of all transactions with categories</p>
+                      <div class="report-options">
+                        <span class="report-format">PDF, Excel, CSV</span>
+                        <span class="report-period">Custom Range</span>
+                      </div>
+                    </div>
+                    <button
+                      class="btn-generate"
+                      data-report="transaction-history"
+                    >
+                      <i class="fas fa-download"></i>
+                      Generate
+                    </button>
+                  </div>
+
+                  <div class="report-type-card" data-report="budget-analysis">
+                    <div class="report-icon">
+                      <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="report-details">
+                      <h3>Budget Analysis</h3>
+                      <p>Budget vs actual spending with variance analysis</p>
+                      <div class="report-options">
+                        <span class="report-format">PDF, Excel</span>
+                        <span class="report-period">Monthly, Quarterly</span>
+                      </div>
+                    </div>
+                    <button class="btn-generate" data-report="budget-analysis">
+                      <i class="fas fa-download"></i>
+                      Generate
+                    </button>
+                  </div>
+
+                  <div class="report-type-card" data-report="income-statement">
+                    <div class="report-icon">
+                      <i class="fas fa-receipt"></i>
+                    </div>
+                    <div class="report-details">
+                      <h3>Income Statement</h3>
+                      <p>Professional income and expense statement</p>
+                      <div class="report-options">
+                        <span class="report-format">PDF, Excel</span>
+                        <span class="report-period"
+                          >Monthly, Quarterly, Yearly</span
+                        >
+                      </div>
+                    </div>
+                    <button class="btn-generate" data-report="income-statement">
+                      <i class="fas fa-download"></i>
+                      Generate
+                    </button>
+                  </div>
+
+                  <div class="report-type-card" data-report="cash-flow">
+                    <div class="report-icon">
+                      <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="report-details">
+                      <h3>Cash Flow Report</h3>
+                      <p>Track money movement in and out of accounts</p>
+                      <div class="report-options">
+                        <span class="report-format">PDF, Excel</span>
+                        <span class="report-period">Monthly, Quarterly</span>
+                      </div>
+                    </div>
+                    <button class="btn-generate" data-report="cash-flow">
+                      <i class="fas fa-download"></i>
+                      Generate
+                    </button>
+                  </div>
+
+                  <div class="report-type-card" data-report="tax-summary">
+                    <div class="report-icon">
+                      <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="report-details">
+                      <h3>Tax Summary</h3>
+                      <p>Tax-related transactions and deductions summary</p>
+                      <div class="report-options">
+                        <span class="report-format">PDF, Excel</span>
+                        <span class="report-period">Yearly</span>
+                      </div>
+                    </div>
+                    <button class="btn-generate" data-report="tax-summary">
+                      <i class="fas fa-download"></i>
+                      Generate
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recent Reports Section -->
+              <div class="recent-reports-section">
+                <div class="section-header">
+                  <h2>Recent Reports</h2>
+                  <div class="view-options">
+                    <button class="view-btn active" data-view="grid">
+                      <i class="fas fa-th"></i>
+                    </button>
+                    <button class="view-btn" data-view="list">
+                      <i class="fas fa-list"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  class="recent-reports-container"
+                  id="recentReportsContainer"
+                >
+                  <!-- Recent reports will be loaded here -->
+                  <div class="loading-placeholder">
+                    <div class="loading-spinner"></div>
+                    <p>Loading recent reports...</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Scheduled Reports Section -->
+              <div class="scheduled-reports-section">
+                <div class="section-header">
+                  <h2>Scheduled Reports</h2>
+                  <button class="btn-add" id="addScheduledReport">
+                    <i class="fas fa-plus"></i>
+                    Add Schedule
+                  </button>
+                </div>
+
+                <div class="scheduled-reports-list" id="scheduledReportsList">
+                  <!-- Scheduled reports will be loaded here -->
+                </div>
+              </div>
+
+              <!-- Report Analytics -->
+              <div class="report-analytics-section">
+                <div class="section-header">
+                  <h2>Report Analytics</h2>
+                </div>
+
+                <div class="analytics-grid">
+                  <div class="analytics-card">
+                    <div class="analytics-icon">
+                      <i class="fas fa-download"></i>
+                    </div>
+                    <div class="analytics-content">
+                      <h3>Reports Generated</h3>
+                      <div class="analytics-value" id="totalReports">0</div>
+                      <div class="analytics-period">This month</div>
+                    </div>
+                  </div>
+
+                  <div class="analytics-card">
+                    <div class="analytics-icon">
+                      <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="analytics-content">
+                      <h3>Scheduled Reports</h3>
+                      <div class="analytics-value" id="scheduledCount">0</div>
+                      <div class="analytics-period">Active schedules</div>
+                    </div>
+                  </div>
+
+                  <div class="analytics-card">
+                    <div class="analytics-icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="analytics-content">
+                      <h3>Popular Format</h3>
+                      <div class="analytics-value" id="popularFormat">PDF</div>
+                      <div class="analytics-period">Most downloaded</div>
+                    </div>
+                  </div>
+
+                  <div class="analytics-card">
+                    <div class="analytics-icon">
+                      <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="analytics-content">
+                      <h3>Popular Report</h3>
+                      <div class="analytics-value" id="popularReport">
+                        Financial Summary
+                      </div>
+                      <div class="analytics-period">Most generated</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Report Generation Modal -->
+            <div class="modal" id="reportModal">
+              <div class="modal-content large">
+                <div class="modal-header">
+                  <h2 class="modal-title" id="reportModalTitle">
+                    Generate Report
+                  </h2>
+                  <button class="btn-close" id="closeReportModal">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <form id="reportForm">
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label for="reportType" class="form-label"
+                          >Report Type</label
+                        >
+                        <select id="reportType" class="form-select" required>
+                          <option value="">Select report type...</option>
+                          <option value="financial-summary">
+                            Financial Summary
+                          </option>
+                          <option value="transaction-history">
+                            Transaction History
+                          </option>
+                          <option value="budget-analysis">
+                            Budget Analysis
+                          </option>
+                          <option value="income-statement">
+                            Income Statement
+                          </option>
+                          <option value="cash-flow">Cash Flow Report</option>
+                          <option value="tax-summary">Tax Summary</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="reportFormat" class="form-label"
+                          >Format</label
+                        >
+                        <select id="reportFormat" class="form-select" required>
+                          <option value="">Select format...</option>
+                          <option value="pdf">PDF Document</option>
+                          <option value="excel">Excel Spreadsheet</option>
+                          <option value="csv">CSV File</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label for="reportPeriod" class="form-label"
+                          >Period</label
+                        >
+                        <select id="reportPeriod" class="form-select" required>
+                          <option value="">Select period...</option>
+                          <option value="current-month">Current Month</option>
+                          <option value="last-month">Last Month</option>
+                          <option value="current-quarter">
+                            Current Quarter
+                          </option>
+                          <option value="last-quarter">Last Quarter</option>
+                          <option value="current-year">Current Year</option>
+                          <option value="last-year">Last Year</option>
+                          <option value="custom">Custom Range</option>
+                        </select>
+                      </div>
+
+                      <div
+                        class="form-group"
+                        id="customDateGroup"
+                        style="display: none"
+                      >
+                        <label class="form-label">Custom Date Range</label>
+                        <div class="date-range-inputs">
+                          <input
+                            type="date"
+                            id="startDate"
+                            class="form-control"
+                            placeholder="Start Date"
+                          />
+                          <span class="date-separator">to</span>
+                          <input
+                            type="date"
+                            id="endDate"
+                            class="form-control"
+                            placeholder="End Date"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="reportAccounts" class="form-label"
+                        >Accounts (Optional)</label
+                      >
+                      <select id="reportAccounts" class="form-select" multiple>
+                        <!-- Account options will be populated dynamically -->
+                      </select>
+                      <div class="form-help">
+                        Hold Ctrl/Cmd to select multiple accounts. Leave empty
+                        to include all accounts.
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="reportCategories" class="form-label"
+                        >Categories (Optional)</label
+                      >
+                      <select
+                        id="reportCategories"
+                        class="form-select"
+                        multiple
+                      >
+                        <!-- Category options will be populated dynamically -->
+                      </select>
+                      <div class="form-help">
+                        Hold Ctrl/Cmd to select multiple categories. Leave empty
+                        to include all categories.
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          id="includeCharts"
+                          class="form-check-input"
+                          checked
+                        />
+                        <label for="includeCharts" class="form-check-label"
+                          >Include Charts and Graphs</label
+                        >
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          id="emailReport"
+                          class="form-check-input"
+                        />
+                        <label for="emailReport" class="form-check-label"
+                          >Email report to me</label
+                        >
+                      </div>
+                    </div>
+
+                    <div
+                      class="report-preview"
+                      id="reportPreview"
+                      style="display: none"
+                    >
+                      <h4>Report Preview</h4>
+                      <div class="preview-content">
+                        <div class="preview-item">
+                          <span class="preview-label">Type:</span>
+                          <span class="preview-value" id="previewType"></span>
+                        </div>
+                        <div class="preview-item">
+                          <span class="preview-label">Format:</span>
+                          <span class="preview-value" id="previewFormat"></span>
+                        </div>
+                        <div class="preview-item">
+                          <span class="preview-label">Period:</span>
+                          <span class="preview-value" id="previewPeriod"></span>
+                        </div>
+                        <div class="preview-item">
+                          <span class="preview-label">Estimated Size:</span>
+                          <span class="preview-value" id="previewSize"
+                            >~2.5 MB</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="modal-actions">
+                  <button type="button" class="btn-secondary" id="cancelReport">
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    form="reportForm"
+                    class="btn-primary"
+                    id="generateReport"
+                  >
+                    <i class="fas fa-download"></i>
+                    Generate & Download
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Schedule Report Modal -->
+            <div class="modal" id="scheduleModal">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h2 class="modal-title">Schedule Report</h2>
+                  <button class="btn-close" id="closeScheduleModal">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+                  <form id="scheduleForm">
+                    <div class="form-group">
+                      <label for="scheduleName" class="form-label"
+                        >Schedule Name</label
+                      >
+                      <input
+                        type="text"
+                        id="scheduleName"
+                        class="form-control"
+                        placeholder="Enter schedule name"
+                        required
+                      />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="scheduleReportType" class="form-label"
+                        >Report Type</label
+                      >
+                      <select
+                        id="scheduleReportType"
+                        class="form-select"
+                        required
+                      >
+                        <option value="">Select report type...</option>
+                        <option value="financial-summary">
+                          Financial Summary
+                        </option>
+                        <option value="transaction-history">
+                          Transaction History
+                        </option>
+                        <option value="budget-analysis">Budget Analysis</option>
+                        <option value="income-statement">
+                          Income Statement
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="scheduleFrequency" class="form-label"
+                        >Frequency</label
+                      >
+                      <select
+                        id="scheduleFrequency"
+                        class="form-select"
+                        required
+                      >
+                        <option value="">Select frequency...</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="quarterly">Quarterly</option>
+                        <option value="yearly">Yearly</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="scheduleFormat" class="form-label"
+                        >Format</label
+                      >
+                      <select id="scheduleFormat" class="form-select" required>
+                        <option value="pdf">PDF Document</option>
+                        <option value="excel">Excel Spreadsheet</option>
+                        <option value="csv">CSV File</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="scheduleEmail" class="form-label"
+                        >Email Address</label
+                      >
+                      <input
+                        type="email"
+                        id="scheduleEmail"
+                        class="form-control"
+                        placeholder="Enter email address"
+                      />
+                      <div class="form-help">
+                        Leave empty to use your account email
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input
+                          type="checkbox"
+                          id="scheduleActive"
+                          class="form-check-input"
+                          checked
+                        />
+                        <label for="scheduleActive" class="form-check-label"
+                          >Start schedule immediately</label
+                        >
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="modal-actions">
+                  <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelSchedule"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    form="scheduleForm"
+                    class="btn-primary"
+                    id="saveSchedule"
+                  >
+                    <i class="fas fa-calendar"></i>
+                    Save Schedule
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js//report.js"></script>
+  </body>
+</html>

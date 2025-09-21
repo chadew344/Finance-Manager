@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Profile FinanceFlow</title>
+  </head>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="/css/user-profile.css" />
+  <body>
+    <div class="app-container">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-name">
+            <a href="/pages/dashboard.html"
+              ><i class="fas fa-chart-line me-2 flex-wrap"></i>FinanceFlow<i
+                class="fas fa-crown premium-crown"
+              ></i
+            ></a>
+          </div>
+        </div>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="/pages/dashboard.html" class="nav-link">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/financial-account.html" class="nav-link">
+              <i class="fas fa-wallet"></i>
+              <span>Accounts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/transaction.html" class="nav-link">
+              <i class="fas fa-exchange-alt"></i>
+              <span>Transactions</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/categories-and-tags.html" class="nav-link">
+              <i class="fas fa-layer-group"></i>
+              <span>Categories & Tags</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/budget.html" class="nav-link">
+              <i class="fas fa-chart-pie"></i>
+              <span>Budget</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/analytics.html" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/report.html" class="nav-link">
+              <i class="fas fa-file-invoice"></i>
+              <span>Reports</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/setting.html" class="nav-link">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="upgrade-container">
+          <a href="/pages/subscription-plans.html" class="btn-upgrade">
+            <i class="fas fa-crown"></i>
+            Upgrade to Premium
+          </a>
+        </div>
+
+        <div class="sidebar-footer">
+          <a href="#" class="nav-link">
+            <i class="fas fa-question-circle"></i>
+            <span>Help & Support</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-bar justify-content-lg-end">
+          <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="user-profile">
+            <span class="premium-badge d-none" id="user-profile-premium-badge">
+              <i class="fas fa-crown"></i>
+              Premium
+            </span>
+
+            <div class="notification-container">
+              <button class="notification-toggle" id="notificationToggle">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="notificationBadge">3</span>
+              </button>
+
+              <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                  <h6 class="notification-title">Notifications</h6>
+                  <button class="mark-all-read" id="markAllRead">
+                    Mark all as read
+                  </button>
+                </div>
+
+                <div class="notification-list" id="notificationList">
+                  <!-- Notifications will be populated by JavaScript -->
+                </div>
+
+                <div class="notification-footer">
+                  <a href="#" class="view-all-link">View all notifications</a>
+                </div>
+              </div>
+            </div>
+
+            <button class="theme-toggle" id="themeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <div class="user-avatar">JD</div>
+
+            <div class="dropdown-menu profile-dropdown">
+              <div class="dropdown-header">
+                <div class="user-info">
+                  <div class="user-name">John Doe</div>
+                  <div class="user-email">john.doe@example.com</div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="/pages/user-profile.html" class="dropdown-item">
+                <i class="fas fa-user me-2"></i>Profile
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-cog me-2"></i>Settings
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-lock me-2"></i>Privacy
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <div class="content-container w-100 px-lg-5 px-sm-4">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Profile Details</h1>
+              <p class="page-subtitle">
+                Manage your personal information and account settings.
+              </p>
+            </div>
+            <button class="btn-add d-none" onclick="openModal('add')">
+              <i class="fas fa-plus"></i>
+              Add New Account
+            </button>
+          </div>
+
+          <div class="accounts-grid" id="accountsGrid">
+            <div class="profile-card">
+              <div class="profile-header">
+                <div
+                  class="profile-avatar"
+                  onclick="document.getElementById('avatarInput').click()"
+                >
+                  JD
+                  <div class="avatar-upload">
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <input
+                    type="file"
+                    id="avatarInput"
+                    style="display: none"
+                    accept="image/*"
+                  />
+                </div>
+                <div class="profile-info">
+                  <h2>John Doe</h2>
+                  <p>john.doe@example.com</p>
+                  <p>Member since January 2024</p>
+                </div>
+              </div>
+
+              <div id="alertContainer"></div>
+
+              <!-- Personal Information Section -->
+              <div class="profile-section">
+                <div class="section-title">
+                  <i class="fas fa-user"></i>
+                  Personal Information
+                </div>
+
+                <form id="personalInfoForm">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">First Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="firstName"
+                        value="John"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Last Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="lastName"
+                        value="Doe"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Email Address</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        value="john.doe@example.com"
+                        required
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Phone Number</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        value="+1 (555) 123-4567"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Date of Birth</label>
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="dateOfBirth"
+                        value="1990-05-15"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Currency</label>
+                      <select class="form-control" id="currency">
+                        <option value="USD">USD - US Dollar</option>
+                        <option value="EUR">EUR - Euro</option>
+                        <option value="GBP">GBP - British Pound</option>
+                        <option value="JPY">JPY - Japanese Yen</option>
+                        <option value="CAD">CAD - Canadian Dollar</option>
+                        <option value="AUD">AUD - Australian Dollar</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="address"
+                      value="123 Main Street, City, State 12345"
+                    />
+                  </div>
+
+                  <div class="action-buttons">
+                    <button type="submit" class="btn-primary">
+                      <i class="fas fa-save"></i>
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Security Settings Card -->
+            <div class="profile-card security-section">
+              <div class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                Security Settings
+              </div>
+
+              <form id="passwordForm">
+                <div class="form-group">
+                  <label class="form-label">Current Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="currentPassword"
+                    required
+                  />
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">New Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="newPassword"
+                      required
+                    />
+                    <div class="password-strength" id="passwordStrength"></div>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Confirm New Password</label>
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="confirmPassword"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="action-buttons">
+                  <button type="submit" class="btn-primary">
+                    <i class="fas fa-key"></i>
+                    Change Password
+                  </button>
+                </div>
+              </form>
+
+              <hr
+                style="margin: 2rem 0; border-color: var(--border-color-value)"
+              />
+
+              <div class="section-title" style="margin-bottom: 1rem">
+                <i class="fas fa-mobile-alt"></i>
+                Two-Factor Authentication
+              </div>
+
+              <p
+                style="
+                  color: var(--text-secondary-color);
+                  margin-bottom: 1rem;
+                  font-size: 0.9rem;
+                "
+              >
+                Add an extra layer of security to your account by enabling
+                two-factor authentication.
+              </p>
+
+              <div class="action-buttons">
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  onclick="setup2FA()"
+                >
+                  <i class="fas fa-shield-alt"></i>
+                  Enable 2FA
+                </button>
+              </div>
+            </div>
+
+            <!-- Account Preferences Card -->
+            <div class="profile-card">
+              <div class="section-title">
+                <i class="fas fa-cog"></i>
+                Account Preferences
+              </div>
+
+              <form id="preferencesForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Language</label>
+                    <select class="form-control" id="language">
+                      <option value="en">English</option>
+                      <option value="es">Spanish</option>
+                      <option value="fr">French</option>
+                      <option value="de">German</option>
+                      <option value="it">Italian</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Timezone</label>
+                    <select class="form-control" id="timezone">
+                      <option value="America/New_York">
+                        Eastern Time (UTC-5)
+                      </option>
+                      <option value="America/Chicago">
+                        Central Time (UTC-6)
+                      </option>
+                      <option value="America/Denver">
+                        Mountain Time (UTC-7)
+                      </option>
+                      <option value="America/Los_Angeles">
+                        Pacific Time (UTC-8)
+                      </option>
+                      <option value="Europe/London">GMT (UTC+0)</option>
+                      <option value="Europe/Paris">CET (UTC+1)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <input
+                      type="checkbox"
+                      id="emailNotifications"
+                      checked
+                      style="margin-right: 0.5rem"
+                    />
+                    Email Notifications
+                  </label>
+                  <p
+                    style="
+                      color: var(--text-muted-color);
+                      font-size: 0.85rem;
+                      margin-top: 0.25rem;
+                    "
+                  >
+                    Receive email notifications about account activity and
+                    updates.
+                  </p>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">
+                    <input
+                      type="checkbox"
+                      id="marketingEmails"
+                      style="margin-right: 0.5rem"
+                    />
+                    Marketing Communications
+                  </label>
+                  <p
+                    style="
+                      color: var(--text-muted-color);
+                      font-size: 0.85rem;
+                      margin-top: 0.25rem;
+                    "
+                  >
+                    Receive promotional emails and product updates.
+                  </p>
+                </div>
+
+                <div class="action-buttons">
+                  <button type="submit" class="btn-primary">
+                    <i class="fas fa-save"></i>
+                    Save Preferences
+                  </button>
+                </div>
+              </form>
+            </div>
+
+            <!-- Account Actions Card -->
+            <div class="profile-card">
+              <div class="section-title">
+                <i class="fas fa-exclamation-triangle"></i>
+                Account Actions
+              </div>
+
+              <p
+                style="
+                  color: var(--text-secondary-color);
+                  margin-bottom: 1.5rem;
+                "
+              >
+                Manage your account data and account status.
+              </p>
+
+              <div class="action-buttons">
+                <button
+                  type="button"
+                  class="btn-secondary"
+                  onclick="exportData()"
+                >
+                  <i class="fas fa-download"></i>
+                  Export Data
+                </button>
+
+                <button
+                  type="button"
+                  class="btn-danger"
+                  onclick="confirmDeleteAccount()"
+                >
+                  <i class="fas fa-trash"></i>
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/user-profile.js"></script>
+  </body>
+</html>

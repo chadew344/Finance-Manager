@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>subscription plans Finance Flow</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/subscription-plan.css" />
+  </head>
+
+  <body>
+    <div class="main-container">
+      <div class="container">
+        <div class="header-section">
+          <h1>
+            <i class="fas fa-chart-line me-3"></i>Choose Your Finance Plan
+          </h1>
+          <p>
+            Take control of your finances with our comprehensive money
+            management platform. Perfect for individuals and businesses.
+          </p>
+        </div>
+
+        <div class="plan-type-toggle">
+          <div class="type-switch">
+            <div class="type-slider" id="typeSlider"></div>
+            <div class="type-option active" data-type="personal">
+              <i class="fas fa-user me-2"></i>Personal
+            </div>
+            <div class="type-option" data-type="business">
+              <i class="fas fa-building me-2"></i>Business
+            </div>
+          </div>
+        </div>
+
+        <div class="billing-toggle">
+          <div class="billing-switch">
+            <span>Monthly</span>
+            <label class="switch">
+              <input type="checkbox" id="billingToggle" />
+              <span class="slider"></span>
+            </label>
+            <span>Yearly</span>
+            <span class="save-badge">Save 20%</span>
+          </div>
+        </div>
+
+        <div class="plans-section active" id="personal-plans">
+          <div class="row justify-content-center">
+            <!-- Personal Free Plan -->
+            <div class="col-lg-4 col-md-6">
+              <div class="plan-card glass free-plan">
+                <div class="free-badge">
+                  <i class="fas fa-gift me-1"></i>Free Forever
+                </div>
+                <div class="plan-icon">
+                  <i class="fas fa-seedling"></i>
+                </div>
+                <h3 class="plan-name">Starter</h3>
+                <p class="plan-description">
+                  Get started with basic personal finance tracking at no cost
+                </p>
+                <div class="plan-price">
+                  <div class="free-price">FREE</div>
+                  <div class="price-period">forever</div>
+                </div>
+                <ul class="plan-features">
+                  <li class="limited">
+                    <i class="fas fa-user"></i> 1 user only
+                  </li>
+                  <li class="limited">
+                    <i class="fas fa-bank"></i> Connect 1 bank account
+                  </li>
+                  <li>
+                    <i class="fas fa-chart-pie"></i> Basic budget tracking
+                  </li>
+                  <li class="limited">
+                    <i class="fas fa-receipt"></i> 50 transactions/month
+                  </li>
+                  <li><i class="fas fa-mobile-alt"></i> Mobile app access</li>
+                  <li class="limited">
+                    <i class="fas fa-envelope"></i> Community support
+                  </li>
+                </ul>
+                <button class="plan-btn" data-plan="personal-free">
+                  <i class="fas fa-rocket me-2"></i>Start Free
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+              <div class="plan-card glass basic-plan popular">
+                <div class="popular-badge">
+                  <i class="fas fa-star me-1"></i>Most Popular
+                </div>
+                <div class="plan-icon">
+                  <i class="fas fa-user"></i>
+                </div>
+                <h3 class="plan-name">Personal Pro</h3>
+                <p class="plan-description">
+                  Advanced personal finance management with premium features
+                </p>
+                <div class="plan-price">
+                  <div class="price-amount">
+                    $<span class="price-value">9</span>
+                  </div>
+                  <div class="price-period">per month</div>
+                </div>
+                <ul class="plan-features">
+                  <li>
+                    <i class="fas fa-users"></i> Up to 3 users (you + 2 others)
+                  </li>
+                  <li><i class="fas fa-bank"></i> Connect 5 bank accounts</li>
+                  <li>
+                    <i class="fas fa-chart-pie"></i> Advanced budget tracking &
+                    goals
+                  </li>
+                  <li><i class="fas fa-receipt"></i> Unlimited transactions</li>
+                  <li><i class="fas fa-bell"></i> Bill reminders & alerts</li>
+                  <li><i class="fas fa-chart-bar"></i> Detailed reports</li>
+                  <li>
+                    <i class="fas fa-mobile-alt"></i> Premium mobile features
+                  </li>
+                  <li><i class="fas fa-headset"></i> Priority email support</li>
+                </ul>
+                <button class="plan-btn" data-plan="personal-pro">
+                  <i class="fas fa-arrow-right me-2"></i>Upgrade to Pro
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+              <div class="plan-card glass pro-plan">
+                <div class="plan-icon">
+                  <i class="fas fa-crown"></i>
+                </div>
+                <h3 class="plan-name">Personal Elite</h3>
+                <p class="plan-description">
+                  Premium personal finance with investment tracking and advisory
+                </p>
+                <div class="plan-price">
+                  <div class="price-amount">
+                    $<span class="price-value">19</span>
+                  </div>
+                  <div class="price-period">per month</div>
+                </div>
+                <ul class="plan-features">
+                  <li>
+                    <i class="fas fa-users"></i> Up to 5 users (family plan)
+                  </li>
+                  <li>
+                    <i class="fas fa-university"></i> Unlimited bank accounts
+                  </li>
+                  <li>
+                    <i class="fas fa-chart-line"></i> Investment portfolio
+                    tracking
+                  </li>
+                  <li>
+                    <i class="fas fa-calculator"></i> Tax optimization tools
+                  </li>
+                  <li>
+                    <i class="fas fa-shield-alt"></i> Financial health score
+                  </li>
+                  <li>
+                    <i class="fas fa-user-tie"></i> Personal finance advisor
+                  </li>
+                  <li><i class="fas fa-sync"></i> Automated savings rules</li>
+                  <li><i class="fas fa-phone"></i> Premium phone support</li>
+                </ul>
+                <button class="plan-btn" data-plan="personal-elite">
+                  <i class="fas fa-diamond me-2"></i>Go Elite
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plans-section" id="business-plans">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6">
+              <div class="plan-card glass free-plan">
+                <div class="free-badge">
+                  <i class="fas fa-gift me-1"></i>Free Trial
+                </div>
+                <div class="plan-icon">
+                  <i class="fas fa-store"></i>
+                </div>
+                <h3 class="plan-name">Business Starter</h3>
+                <p class="plan-description">
+                  Try business finance management with our free starter plan
+                </p>
+                <div class="plan-price">
+                  <div class="free-price">FREE</div>
+                  <div class="price-period">30 days trial</div>
+                </div>
+                <ul class="plan-features">
+                  <li class="limited">
+                    <i class="fas fa-users"></i> Up to 2 users
+                  </li>
+                  <li class="limited">
+                    <i class="fas fa-bank"></i> Connect 2 business accounts
+                  </li>
+                  <li class="limited">
+                    <i class="fas fa-file-invoice"></i> 25 invoices/month
+                  </li>
+                  <li>
+                    <i class="fas fa-chart-pie"></i> Basic expense tracking
+                  </li>
+                  <li class="limited">
+                    <i class="fas fa-calculator"></i> Basic reporting
+                  </li>
+                  <li><i class="fas fa-mobile-alt"></i> Mobile app access</li>
+                  <li class="limited">
+                    <i class="fas fa-envelope"></i> Email support
+                  </li>
+                </ul>
+                <button class="plan-btn" data-plan="business-free">
+                  <i class="fas fa-play me-2"></i>Start Free Trial
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+              <div class="plan-card glass business-plan popular">
+                <div class="popular-badge">
+                  <i class="fas fa-star me-1"></i>Most Popular
+                </div>
+                <div class="plan-icon">
+                  <i class="fas fa-building"></i>
+                </div>
+                <h3 class="plan-name">Small Business</h3>
+                <p class="plan-description">
+                  Comprehensive financial management for growing small
+                  businesses
+                </p>
+                <div class="plan-price">
+                  <div class="price-amount">
+                    $<span class="price-value">29</span>
+                  </div>
+                  <div class="price-period">per month</div>
+                </div>
+                <ul class="plan-features">
+                  <li>
+                    <i class="fas fa-users"></i> Up to 6 users (owner + 5 team)
+                  </li>
+                  <li>
+                    <i class="fas fa-university"></i> Unlimited bank accounts
+                  </li>
+                  <li>
+                    <i class="fas fa-file-invoice-dollar"></i> Unlimited
+                    invoicing & payments
+                  </li>
+                  <li>
+                    <i class="fas fa-calculator"></i> Tax preparation tools
+                  </li>
+                  <li><i class="fas fa-chart-bar"></i> Advanced reporting</li>
+                  <li><i class="fas fa-credit-card"></i> Expense management</li>
+                  <li><i class="fas fa-sync"></i> Automated transactions</li>
+                  <li><i class="fas fa-headset"></i> Priority support</li>
+                </ul>
+                <button class="plan-btn" data-plan="small-business">
+                  <i class="fas fa-briefcase me-2"></i>Go Business
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+              <div class="plan-card glass pro-plan">
+                <div class="plan-icon">
+                  <i class="fas fa-city"></i>
+                </div>
+                <h3 class="plan-name">Enterprise</h3>
+                <p class="plan-description">
+                  Advanced financial solutions for established businesses
+                </p>
+                <div class="plan-price">
+                  <div class="price-amount">
+                    $<span class="price-value">99</span>
+                  </div>
+                  <div class="price-period">per month</div>
+                </div>
+                <ul class="plan-features">
+                  <li><i class="fas fa-users"></i> Unlimited users</li>
+                  <li><i class="fas fa-globe"></i> Multi-location support</li>
+                  <li>
+                    <i class="fas fa-shield-alt"></i> Advanced security & audit
+                  </li>
+                  <li><i class="fas fa-cogs"></i> Custom integrations</li>
+                  <li>
+                    <i class="fas fa-chart-line"></i> Financial forecasting
+                  </li>
+                  <li><i class="fas fa-coins"></i> Multi-currency support</li>
+                  <li>
+                    <i class="fas fa-user-tie"></i> Dedicated account manager
+                  </li>
+                  <li><i class="fas fa-phone"></i> 24/7 phone support</li>
+                </ul>
+                <button class="plan-btn" data-plan="enterprise">
+                  <i class="fas fa-rocket me-2"></i>Contact Sales
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="paymentModal"
+      tabindex="-1"
+      aria-labelledby="paymentModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div
+          class="modal-content glass"
+          style="
+            background: var(--dark-bg);
+            border: 1px solid var(--glass-border);
+          "
+        >
+          <div class="modal-header border-0">
+            <h5 class="modal-title text-white" id="paymentModalLabel">
+              <i class="fas fa-credit-card me-2"></i>Complete Your Subscription
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              class="selected-plan-summary glass p-4 mb-4"
+              style="border-radius: 15px"
+            >
+              <div class="row align-items-center">
+                <div class="col-md-8">
+                  <h6 class="text-white mb-1">Selected Plan</h6>
+                  <h4 class="text-white mb-2" id="selected-plan-name">
+                    Personal Plan
+                  </h4>
+                  <p class="text-secondary mb-0" id="selected-plan-features">
+                    Up to 3 users • 5 bank accounts • Advanced budget tracking
+                  </p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                  <div class="price-display">
+                    <span class="h3 text-white"
+                      >$<span id="selected-price">9</span></span
+                    >
+                    <span class="text-secondary"
+                      >/<span id="selected-period">month</span></span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="payment-methods mb-4">
+              <h6 class="text-white mb-3">Choose Payment Method</h6>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div
+                    class="payment-option glass p-3"
+                    style="cursor: pointer; border-radius: 12px"
+                    data-method="payhere"
+                  >
+                    <div class="d-flex align-items-center">
+                      <img
+                        src="https://www.payhere.lk/downloads/images/payhere_long_banner.png"
+                        alt="PayHere"
+                        style="height: 30px; width: auto"
+                      />
+                      <div class="ms-3">
+                        <div class="text-white fw-semibold">PayHere</div>
+                        <small class="text-secondary"
+                          >Cards, Banking, Digital Wallets</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div
+                    class="payment-option glass p-3"
+                    style="cursor: pointer; border-radius: 12px"
+                    data-method="card"
+                  >
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-credit-card text-white"
+                        style="font-size: 1.5rem"
+                      ></i>
+                      <div class="ms-3">
+                        <div class="text-white fw-semibold">
+                          Credit/Debit Card
+                        </div>
+                        <small class="text-secondary"
+                          >Visa, MasterCard, Amex</small
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="payhere-form" style="display: none">
+              <div
+                class="alert alert-info glass border-0"
+                style="background: rgba(79, 172, 254, 0.1)"
+              >
+                <i class="fas fa-info-circle me-2"></i>
+                <span class="text-white"
+                  >You will be redirected to PayHere secure payment
+                  gateway.</span
+                >
+              </div>
+            </div>
+
+            <div id="card-form" style="display: none">
+              <form id="cardPaymentForm">
+                <div class="row g-3">
+                  <div class="col-12">
+                    <label class="form-label text-white">Card Number</label>
+                    <input
+                      type="text"
+                      class="form-control glass border-0 text-white"
+                      placeholder="1234 5678 9012 3456"
+                      maxlength="19"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label text-white">Expiry Date</label>
+                    <input
+                      type="text"
+                      class="form-control glass border-0 text-white"
+                      placeholder="MM/YY"
+                      maxlength="5"
+                    />
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label text-white">CVV</label>
+                    <input
+                      type="text"
+                      class="form-control glass border-0 text-white"
+                      placeholder="123"
+                      maxlength="4"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label text-white">Cardholder Name</label>
+                    <input
+                      type="text"
+                      class="form-control glass border-0 text-white"
+                      placeholder="John Doe"
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              id="proceed-payment"
+              style="background: var(--accent-gradient); border: none"
+            >
+              <i class="fas fa-lock me-2"></i>Secure Payment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/subscription-plan.js"></script>
+  </body>
+</html>

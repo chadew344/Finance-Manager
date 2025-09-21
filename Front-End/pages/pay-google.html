@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backend Endpoint Tester</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-color: #f4f4f4;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+      pre {
+        background-color: #eee;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        margin-top: 20px;
+      }
+      .status {
+        font-weight: bold;
+        text-align: center;
+        margin-top: 10px;
+      }
+      .success {
+        color: green;
+      }
+      .error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Test Backend Endpoint</h1>
+      <p>
+        Click the button below to send a POST request to your backend with a
+        sample JSON payload.
+      </p>
+      <button id="sendRequestBtn">Send Test Request</button>
+
+      <div class="status" id="statusMessage"></div>
+      <pre id="responseBody"></pre>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script>
+      document
+        .getElementById("sendRequestBtn")
+        .addEventListener("click", () => {
+          const statusMessage = document.getElementById("statusMessage");
+          const responseBody = document.getElementById("responseBody");
+
+          statusMessage.textContent = "Sending request...";
+          responseBody.textContent = "";
+          statusMessage.className = "status";
+
+          payGoogle();
+        });
+
+      async function payGoogle() {
+        const endpoint = "http://localhost:8080/api/payment/process-payment";
+
+        const data = {
+          token: "sample_google_pay_token_for_testing_12345",
+        };
+
+        try {
+          const response = await window.apiCall(endpoint, {
+            method: "POST",
+            body: JSON.stringify(data),
+          });
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const responseData = await response.json();
+
+          statusMessage.textContent =
+            "Success! Check the console and response body.";
+          statusMessage.className = "status success";
+          responseBody.textContent = JSON.stringify(responseData, null, 2);
+          console.log("Success:", responseData);
+        } catch (error) {
+          statusMessage.textContent = "Error! Check the console for details.";
+          statusMessage.className = "status error";
+          responseBody.textContent = `Error: ${error.message}`;
+          console.error("Error:", error);
+        }
+      }
+    </script>
+  </body>
+</html>
