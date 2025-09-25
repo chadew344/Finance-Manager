@@ -26,4 +26,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
 
     List<Transaction> findFirst8ByFinancialAccount_UserAccount_IdOrderByCreatedAtDesc(Long userId);
 
+    List<Transaction> findByFinancialAccount_UserAccount_IdAndTransactionDateBetween(Long userId, LocalDateTime localDateTime, LocalDateTime localDateTime1);
+
 }

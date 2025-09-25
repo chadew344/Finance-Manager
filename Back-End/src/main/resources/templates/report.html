@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${reportTitle}"></title>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 14px; margin: 20px; }
+        h1, h2 { color: #333; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .summary-box { border: 1px solid #ddd; padding: 15px; margin-bottom: 20px; }
+        .summary-box p { margin: 5px 0; }
+        .summary-box .income { color: #28a745; }
+        .summary-box .expense { color: #dc3545; }
+        .summary-box .balance { font-weight: bold; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .text-center { text-align: center; }
+        .chart-container { margin: 40px 0; }
+        .no-data { font-style: italic; color: #666; text-align: center; padding: 20px; }
+        .tables-container { display: flex; justify-content: space-between; gap: 20px; }
+        .table-section { flex: 1; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center" th:text="${reportTitle}">Financial Report</h1>
+    <p class="text-center">Generated on: <span th:text="${#temporals.format(T(java.time.LocalDate).now(), 'dd-MM-yyyy')}"></span></p>
+
+    <div class="summary-box">
+        <h2>Financial Summary</h2>
+        <p>Total Income: <span class="income" th:text="'LKR ' + ${#numbers.formatDecimal(reportData.totalIncome, 1, 'COMMA', 2, 'POINT')}"></span></p>
+        <p>Total Expenses: <span class="expense" th:text="'LKR ' + ${#numbers.formatDecimal(reportData.totalExpenses, 1, 'COMMA', 2, 'POINT')}"></span></p>
+        <p class="balance">Net Balance: <span th:text="'LKR ' +${#numbers.formatDecimal(reportData.netBalance, 1, 'COMMA', 2, 'POINT')}"></span></p>
+    </div>
+
+    <!-- Chart section (only show if chart exists) -->
+    <div class="chart-container" th:if="${chartImageBase64 != null and !#strings.isEmpty(chartImageBase64)}">
+        <h2>Expenses by Category Chart</h2>
+        <p class="text-center">
+            <img th:src="'data:image/png;base64,' + ${chartImageBase64}" alt="Expenses Chart" style="width: 100%; height: auto;"/>
+        </p>
+    </div>
+
+    <!-- Tables side by side -->
+    <div class="tables-container">
+        <!-- Income Details -->
+        <div class="table-section">
+            <h2>Income by Category</h2>
+            <table th:if="${reportData.incomeByCategory != null and !reportData.incomeByCategory.empty}">
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${reportData.incomeByCategory}">
+                    <td th:text="${entry.key}"></td>
+                    <td th:text="'LKR ' +${#numbers.formatDecimal(entry.value, 1, 'COMMA', 2, 'POINT')}" class="income"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="no-data" th:unless="${reportData.incomeByCategory != null and !reportData.incomeByCategory.empty}">
+                No income data available for this period
+            </div>
+        </div>
+
+        <div class="table-section">
+            <h2>Expenses by Category</h2>
+            <table th:if="${reportData.expensesByCategory != null and !reportData.expensesByCategory.empty}">
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="entry : ${reportData.expensesByCategory}">
+                    <td th:text="${entry.key}"></td>
+                    <td th:text="'LKR ' +${#numbers.formatDecimal(entry.value, 1, 'COMMA', 2, 'POINT')}" class="expense"></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="no-data" th:unless="${reportData.expensesByCategory != null and !reportData.expensesByCategory.empty}">
+                No expense data available for this period
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px; padding: 20px; background-color: #f8f9fa; border-radius: 5px;">
+        <h3>Debug Information</h3>
+        <p>Income categories count: <span th:text="${reportData.incomeByCategory != null ? reportData.incomeByCategory.size() : 0}"></span></p>
+        <p>Expense categories count: <span th:text="${reportData.expensesByCategory != null ? reportData.expensesByCategory.size() : 0}"></span></p>
+    </div>
+</div>
+</body>
+</html>

@@ -12,6 +12,7 @@ import com.financemanager.backend.entity.Category;
 import com.financemanager.backend.entity.FinancialAccount;
 import com.financemanager.backend.entity.Tag;
 import com.financemanager.backend.entity.Transaction;
+import com.financemanager.backend.enumeration.TransactionType;
 import com.financemanager.backend.exception.BusinessException;
 import com.financemanager.backend.exception.ErrorCode;
 import com.financemanager.backend.mapper.TagMapper;
@@ -25,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -111,6 +113,10 @@ public class TransactionServiceImpl implements TransactionService {
         transaction.setTags(tags);
 
         Transaction savedTransaction = transactionRepository.save(transaction);
+
+        FinancialAccount financialAccountAfterTransaction = processTransaction(savedTransaction,  financialAccount);
+        financialAccountRepository.save(financialAccountAfterTransaction);
+
         return transactionMapper.toDto(savedTransaction);
     }
 
@@ -299,36 +305,26 @@ public class TransactionServiceImpl implements TransactionService {
                 .collect(Collectors.toList());
     }
 
+    private FinancialAccount processTransaction(Transaction transaction, FinancialAccount financialAccount) {
+        TransactionType transactionType = transaction.getTransactionType();
 
+        BigDecimal amount = transaction.getAmount();
+        BigDecimal balance = financialAccount.getBalance();
 
+        if (balance.compareTo(BigDecimal.ZERO) <= 0 && transactionType == TransactionType.EXPENSE) {
+            throw new BusinessException(ErrorCode.INSUFFICIENT_BALANCE, "Insufficient Balance to proceed transaction.");
+        }
 
-//    public void processTransaction(Transaction transaction) {
-//        FinancialAccount account = transaction.getFinancialAccount();
-//
-//        switch (account.getAccountType()) {
-//            case CHECKING:
-//            case SAVINGS:
-//                // Standard debit/credit logic
-//                account.setBalance(account.getBalance().add(transaction.getAmount()));
-//                break;
-//            case CREDIT_CARD:
-//                // Specific logic for credit cards
-//                BigDecimal newBalance = account.getBalance().add(transaction.getAmount());
-//                if (newBalance.compareTo(account.getCreditLimit()) > 0) {
-//                    throw new InsufficientCreditException("Transaction exceeds credit limit.");
-//                }
-//                account.setBalance(newBalance);
-//                break;
-//            case LOAN:
-//                // Specific logic for loans (e.g., reducing principal)
-//                account.setBalance(account.getBalance().subtract(transaction.getAmount()));
-//                break;
-//            case OTHER:
-//                // Generic logic
-//                break;
-//        }
-//        // save the account
-//    }
+        BigDecimal balanceAfter = switch (transactionType) {
+            case INCOME -> balance.add(amount);
+            case EXPENSE, TRANSFER -> balance.subtract(amount);
+        };
+
+        financialAccount.setBalance(balanceAfter);
+
+        return financialAccount;
+    }
+
 
 }
 

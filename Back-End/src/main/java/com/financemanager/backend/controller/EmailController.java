@@ -1,10 +1,9 @@
 package com.financemanager.backend.controller;
 
+import com.financemanager.backend.service.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/email")
@@ -12,4 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 public class EmailController {
+    private final EmailService emailService;
+
+    @PostMapping("/send")
+    public String sendEmail(){
+       return emailService.sendEmail();
+    }
 }

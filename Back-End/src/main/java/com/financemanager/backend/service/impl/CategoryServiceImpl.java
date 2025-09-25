@@ -93,7 +93,6 @@ public class CategoryServiceImpl implements CategoryService {
         categoryRepository.deleteById(id);
     }
 
-
     private UserAccount getCurrentUserAccount(Long userAccountId) {
         return userAccountRepository.findById(userAccountId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_ACCOUNT_NOT_FOUND, "User account not found"));

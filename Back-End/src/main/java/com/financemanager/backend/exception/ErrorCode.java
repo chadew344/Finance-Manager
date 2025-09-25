@@ -34,8 +34,9 @@ public enum ErrorCode {
 
     INVALID_PHONE_NUMBER("INVALID_PHONE_NUMBER", "Invalid phone number" , BAD_REQUEST ),
 
-    SUBSCRIPTION_PLAN_NOT_FOUND("SUBSCRIPTION_PLAN_NOT_FOUND", "Subscription Plan not found" , NOT_FOUND ),;
+    SUBSCRIPTION_PLAN_NOT_FOUND("SUBSCRIPTION_PLAN_NOT_FOUND", "Subscription Plan not found" , NOT_FOUND ),
 
+    INSUFFICIENT_BALANCE("INSUFFICIENT_BALANCE" , "Insufficient Balance to proceed transaction.", BAD_REQUEST);
 
     private final String code;
     private final String defaultMessage;
