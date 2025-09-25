@@ -341,31 +341,14 @@ The application uses environment variables for sensitive data. You need to creat
 ## Demo Video
 
 🎥 **Watch the complete application demo:**
-[Finance Manager - Complete Feature Walkthrough](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+[Finance Manager - Complete Feature Walkthrough](https://youtu.be/tFoa6NreV-A)
 
 *The demo video showcases all major features including transaction management, budgeting, reporting, and collaboration features.*
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## Support
-
-If you encounter any issues or have questions, please:
-1. Check the troubleshooting section above
-2. Search existing [GitHub Issues](https://github.com/yourusername/finance-manager/issues)
-3. Create a new issue with detailed information about your problem
+- *Note: Currently, the video quality is not optimal. We are uploading it as an unlisted video for now and will make it public once the video quality improves. An updated version with a comprehensive explanation of the application features and codebase will also be provided.*
 
 ## Acknowledgments
 
 - Thanks to the Spring Boot community for excellent documentation
 - Chart.js team for the amazing charting library
 - Bootstrap team for the responsive framework
+- Payhere sanbox testing for the developets
