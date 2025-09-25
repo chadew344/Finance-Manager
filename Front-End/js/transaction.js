@@ -401,19 +401,21 @@ function renderTransactions() {
                   ? "Start by adding your first transaction"
                   : "Try adjusting your search or filter criteria"
               }
-          </div>
-           ${
-             transactions.length === 0
-               ? '<button class="btn-add" onclick="openTransactionModal()"><i class="fas fa-plus me-2"></i>Add Your First Transaction</button>'
-               : ""
-           }
-        
-      </div>
+         
     `;
     container.html(emptyStateHtml);
     updatePagination();
     return;
   }
+
+  //  </div>
+  //          ${
+  //            transactions.length === 0
+  //              ? '<button class="btn-add" onclick="openTransactionModal()"><i class="fas fa-plus me-2"></i>Add Your First Transaction</button>'
+  //              : ""
+  //          }
+
+  //     </div>
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;

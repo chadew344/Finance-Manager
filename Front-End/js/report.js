@@ -7,7 +7,6 @@ $(document).ready(function () {
   initializeReportManagement();
 });
 
-// Global report data
 let reportData = {
   recentReports: [],
   scheduledReports: [],
@@ -16,15 +15,12 @@ let reportData = {
   categories: [],
 };
 
-// Report generation status tracking
 let currentReportGeneration = null;
 
-// Report Management initialization
 async function initializeReportManagement() {
   console.log("Initializing report management...");
 
   try {
-    // Load all report data
     await Promise.allSettled([
       loadRecentReports(),
       loadScheduledReports(),
@@ -32,7 +28,6 @@ async function initializeReportManagement() {
       loadAccountsAndCategories(),
     ]);
 
-    // Initialize event handlers
     initializeReportEventHandlers();
 
     console.log("Report management initialization complete");
@@ -43,49 +38,38 @@ async function initializeReportManagement() {
   }
 }
 
-// Initialize event handlers
 function initializeReportEventHandlers() {
-  // Quick report generation buttons
   $(".btn-generate").on("click", handleQuickReportGeneration);
 
-  // Custom report button
   $("#customReport").on("click", () => openReportModal());
 
-  // Schedule report buttons
   $("#scheduleReport, #addScheduledReport").on("click", () =>
     openScheduleModal()
   );
 
-  // View toggle for recent reports
   $(".view-btn").on("click", handleViewToggle);
 
-  // Modal close handlers
   $("#closeReportModal, #cancelReport").on("click", closeReportModal);
   $("#closeScheduleModal, #cancelSchedule").on("click", closeScheduleModal);
 
-  // Form submission handlers
   $("#reportForm").on("submit", handleReportGeneration);
   $("#scheduleForm").on("submit", handleScheduleCreation);
 
-  // Form field change handlers
   $("#reportPeriod").on("change", handlePeriodChange);
   $("#reportType, #reportFormat, #reportPeriod").on(
     "change",
     updateReportPreview
   );
 
-  // Recent report actions
   $(document).on("click", ".btn-download", handleReportDownload);
   $(document).on("click", ".btn-regenerate", handleReportRegeneration);
   $(document).on("click", ".btn-share", handleReportSharing);
   $(document).on("click", ".btn-delete", handleReportDeletion);
 
-  // Scheduled report actions
   $(document).on("click", ".btn-toggle-schedule", handleScheduleToggle);
   $(document).on("click", ".btn-edit-schedule", handleScheduleEdit);
   $(document).on("click", ".btn-delete-schedule", handleScheduleDeletion);
 
-  // Close modals on backdrop click
   $(".modal").on("click", function (e) {
     if (e.target === this) {
       closeReportModal();
@@ -96,7 +80,6 @@ function initializeReportEventHandlers() {
   console.log("Report event handlers initialized");
 }
 
-// Load recent reports
 async function loadRecentReports() {
   console.log("Loading recent reports...");
 
@@ -131,7 +114,6 @@ async function loadRecentReports() {
   }
 }
 
-// Render recent reports
 function renderRecentReports(reports) {
   const $container = $("#recentReportsContainer");
   const isListView = $container.hasClass("list-view");
@@ -142,7 +124,6 @@ function renderRecentReports(reports) {
   $container.html(reportsHtml);
 }
 
-// Create recent report card HTML
 function createRecentReportCard(report, isListView = false) {
   const statusClass = report.status.toLowerCase();
   const createdDate = formatReportDate(report.createdAt);
@@ -200,7 +181,6 @@ function createRecentReportCard(report, isListView = false) {
   `;
 }
 
-// Load scheduled reports
 async function loadScheduledReports() {
   console.log("Loading scheduled reports...");
 
@@ -239,7 +219,6 @@ async function loadScheduledReports() {
   }
 }
 
-// Create scheduled report item HTML
 function createScheduledReportItem(schedule) {
   const isActive = schedule.status === "active";
   const nextRun = formatReportDate(schedule.nextRun);
@@ -284,7 +263,6 @@ function createScheduledReportItem(schedule) {
   `;
 }
 
-// Load report analytics
 async function loadReportAnalytics() {
   console.log("Loading report analytics...");
 
@@ -301,7 +279,6 @@ async function loadReportAnalytics() {
     console.log("Report analytics loaded successfully");
   } catch (error) {
     console.error("Error loading report analytics:", error);
-    // Set fallback values
     $("#totalReports").text("0");
     $("#scheduledCount").text("0");
     $("#popularFormat").text("PDF");
@@ -309,7 +286,6 @@ async function loadReportAnalytics() {
   }
 }
 
-// Load accounts and categories for filters
 async function loadAccountsAndCategories() {
   console.log("Loading accounts and categories...");
 
@@ -322,7 +298,6 @@ async function loadAccountsAndCategories() {
     reportData.accounts = accounts;
     reportData.categories = categories;
 
-    // Populate select options
     populateAccountOptions(accounts);
     populateCategoryOptions(categories);
 
@@ -332,7 +307,6 @@ async function loadAccountsAndCategories() {
   }
 }
 
-// Populate account options in select
 function populateAccountOptions(accounts) {
   const $select = $("#reportAccounts");
   $select.empty();
@@ -342,7 +316,6 @@ function populateAccountOptions(accounts) {
   });
 }
 
-// Populate category options in select
 function populateCategoryOptions(categories) {
   const $select = $("#reportCategories");
   $select.empty();
@@ -352,11 +325,11 @@ function populateCategoryOptions(categories) {
   });
 }
 
-// Event handlers
 function handleQuickReportGeneration() {
   const reportType = $(this).data("report");
 
-  // Open modal with pre-selected report type
+  if (this.id === "downloadButton") return;
+
   openReportModal(reportType);
 }
 
@@ -373,7 +346,6 @@ function handleViewToggle() {
     $container.removeClass("list-view");
   }
 
-  // Re-render reports with new view
   if (reportData.recentReports.length > 0) {
     renderRecentReports(reportData.recentReports);
   }
@@ -406,7 +378,6 @@ function updateReportPreview() {
     $("#previewFormat").text(reportFormat.toUpperCase());
     $("#previewPeriod").text(getPeriodDisplay(reportPeriod));
 
-    // Estimate file size based on report type and format
     const estimatedSize = estimateReportSize(
       reportType,
       reportFormat,
@@ -436,21 +407,16 @@ async function handleReportGeneration(e) {
   };
 
   try {
-    // Disable form and show progress
     $("#generateReport")
       .prop("disabled", true)
       .html('<i class="fas fa-spinner fa-spin"></i> Generating...');
 
-    // Start report generation
     await generateReport(formData);
 
-    // Show success message
     showGenerationResult(true, "Report generated successfully!");
 
-    // Reload recent reports
     await loadRecentReports();
 
-    // Close modal after delay
     setTimeout(() => {
       closeReportModal();
     }, 2000);
@@ -477,15 +443,12 @@ async function handleScheduleCreation(e) {
   };
 
   try {
-    // Disable form
     $("#saveSchedule").prop("disabled", true);
 
-    // Create schedule
     await createReportSchedule(formData);
 
     NotificationManager.add("Report schedule created successfully", "success");
 
-    // Reload scheduled reports
     await loadScheduledReports();
     await loadReportAnalytics();
 
@@ -506,7 +469,6 @@ async function handleReportDownload() {
     $btn.addClass("downloading").prop("disabled", true);
     $btn.html('<i class="fas fa-spinner fa-spin"></i> Downloading...');
 
-    // Simulate download process
     await downloadReport(reportId);
 
     NotificationManager.add("Report downloaded successfully", "success");
@@ -526,7 +488,6 @@ async function handleReportRegeneration() {
     await regenerateReport(reportId);
     NotificationManager.add("Report regeneration started", "info");
 
-    // Reload recent reports
     await loadRecentReports();
   } catch (error) {
     console.error("Error regenerating report:", error);
@@ -537,7 +498,6 @@ async function handleReportRegeneration() {
 async function handleReportSharing() {
   const reportId = $(this).data("id");
 
-  // This would typically open a sharing modal or generate a shareable link
   NotificationManager.add("Sharing feature coming soon", "info");
 }
 
@@ -556,7 +516,6 @@ async function handleReportDeletion() {
     await deleteReport(reportId);
     NotificationManager.add("Report deleted successfully", "success");
 
-    // Reload recent reports
     await loadRecentReports();
   } catch (error) {
     console.error("Error deleting report:", error);
@@ -571,7 +530,6 @@ async function handleScheduleToggle() {
     await toggleReportSchedule(scheduleId);
     NotificationManager.add("Schedule updated successfully", "success");
 
-    // Reload scheduled reports
     await loadScheduledReports();
   } catch (error) {
     console.error("Error toggling schedule:", error);
@@ -582,7 +540,6 @@ async function handleScheduleToggle() {
 async function handleScheduleEdit() {
   const scheduleId = $(this).data("id");
 
-  // Find schedule data and open modal with pre-filled data
   const schedule = reportData.scheduledReports.find((s) => s.id === scheduleId);
   if (schedule) {
     openScheduleModal(schedule);
@@ -604,7 +561,6 @@ async function handleScheduleDeletion() {
     await deleteReportSchedule(scheduleId);
     NotificationManager.add("Schedule deleted successfully", "success");
 
-    // Reload scheduled reports
     await loadScheduledReports();
     await loadReportAnalytics();
   } catch (error) {
@@ -613,22 +569,18 @@ async function handleScheduleDeletion() {
   }
 }
 
-// Modal functions
 function openReportModal(reportType = null) {
   const $modal = $("#reportModal");
 
-  // Reset form
   $("#reportForm")[0].reset();
   $("#reportPreview").hide();
   $("#customDateGroup").hide();
 
-  // Pre-select report type if provided
   if (reportType) {
     $("#reportType").val(reportType);
     updateReportPreview();
   }
 
-  // Set current date as default for custom range
   const today = new Date().toISOString().split("T")[0];
   $("#endDate").val(today);
 
@@ -653,7 +605,6 @@ function openScheduleModal(schedule = null) {
     $("#scheduleEmail").val(schedule.email || "");
     $("#scheduleActive").prop("checked", schedule.status === "active");
   } else {
-    // Reset form for new schedule
     $("#scheduleForm")[0].reset();
     $("#scheduleActive").prop("checked", true);
   }
@@ -679,14 +630,11 @@ function showGenerationResult(success, message) {
     </div>
   `;
 
-  // Remove any existing result
   $modal.find(".generation-result").remove();
 
-  // Add new result
   $modal.append(resultHtml);
 }
 
-// API simulation functions (replace with actual API calls)
 async function getRecentReportsData() {
   await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -812,11 +760,9 @@ async function getCategoriesData() {
   ];
 }
 
-// Report generation and management functions
 async function generateReport(reportData) {
   console.log("Generating report with data:", reportData);
 
-  // Simulate API call to backend
   const response = await fetch("/api/reports/generate", {
     method: "POST",
     headers: {
@@ -843,10 +789,8 @@ async function generateReport(reportData) {
 async function downloadReport(reportId) {
   console.log("Downloading report:", reportId);
 
-  // Simulate download process
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  // In real implementation, this would fetch the actual file
   const downloadUrl = `/api/reports/download/${reportId}`;
   window.open(downloadUrl, "_blank");
 }
@@ -854,54 +798,33 @@ async function downloadReport(reportId) {
 async function regenerateReport(reportId) {
   console.log("Regenerating report:", reportId);
 
-  // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  // In real implementation, this would call your API
-  // return await window.apiCall(`/api/reports/${reportId}/regenerate`, { method: 'POST' });
 }
 
 async function deleteReport(reportId) {
   console.log("Deleting report:", reportId);
 
-  // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 500));
-
-  // In real implementation, this would call your API
-  // return await window.apiCall(`/api/reports/${reportId}`, { method: 'DELETE' });
 }
 
 async function createReportSchedule(scheduleData) {
   console.log("Creating report schedule:", scheduleData);
 
-  // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  // In real implementation, this would call your API
-  // return await window.apiCall('/api/reports/schedules', { method: 'POST', body: JSON.stringify(scheduleData) });
 }
 
 async function toggleReportSchedule(scheduleId) {
   console.log("Toggling schedule:", scheduleId);
 
-  // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 500));
-
-  // In real implementation, this would call your API
-  // return await window.apiCall(`/api/reports/schedules/${scheduleId}/toggle`, { method: 'POST' });
 }
 
 async function deleteReportSchedule(scheduleId) {
   console.log("Deleting schedule:", scheduleId);
 
-  // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 500));
-
-  // In real implementation, this would call your API
-  // return await window.apiCall(`/api/reports/schedules/${scheduleId}`, { method: 'DELETE' });
 }
 
-// Utility functions
 function formatReportDate(dateString) {
   const date = new Date(dateString);
   const now = new Date();
@@ -955,7 +878,6 @@ function getPeriodDisplay(period) {
 }
 
 function estimateReportSize(reportType, format, period) {
-  // Base sizes in MB
   const baseSizes = {
     "financial-summary": { pdf: 1.5, excel: 2.0, csv: 0.5 },
     "transaction-history": { pdf: 3.0, excel: 4.0, csv: 1.0 },
@@ -965,7 +887,6 @@ function estimateReportSize(reportType, format, period) {
     "tax-summary": { pdf: 2.5, excel: 3.0, csv: 1.2 },
   };
 
-  // Period multipliers
   const periodMultipliers = {
     "current-month": 1,
     "last-month": 1,
@@ -973,7 +894,7 @@ function estimateReportSize(reportType, format, period) {
     "last-quarter": 2.5,
     "current-year": 8,
     "last-year": 8,
-    custom: 1.5, // Average estimate
+    custom: 1.5,
   };
 
   const baseSize = baseSizes[reportType]?.[format] || 1.5;
@@ -982,3 +903,67 @@ function estimateReportSize(reportType, format, period) {
 
   return `~${estimatedSize.toFixed(1)} MB`;
 }
+
+function downloadPdfReport(year, month) {
+  const statusDiv = document.getElementById("status-message");
+  statusDiv.textContent = "Generating report...";
+
+  const pdfEndpoint = "http://localhost:8080/api/v1/report/pdf";
+
+  const url = new URL(pdfEndpoint);
+  url.search = new URLSearchParams({
+    year: year,
+    month: month,
+  }).toString();
+
+  fetch(url, {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        return response.json().then((err) => {
+          throw new Error(`Server Error: ${err.message || "Unknown error"}`);
+        });
+      }
+
+      const contentDisposition = response.headers.get("Content-Disposition");
+      let filename = `report_${year}_${month}.pdf`;
+      if (contentDisposition) {
+        const matches = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(
+          contentDisposition
+        );
+        if (matches && matches[1]) {
+          filename = matches[1].replace(/['"]/g, "");
+        }
+      }
+
+      return response.blob().then((blob) => ({ blob, filename }));
+    })
+    .then(({ blob, filename }) => {
+      const blobUrl = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = blobUrl;
+      a.download = filename;
+
+      document.body.appendChild(a);
+      a.click();
+
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(a);
+
+      statusDiv.textContent = "Report downloaded successfully!";
+    })
+    .catch((error) => {
+      console.error("Download failed:", error);
+      statusDiv.textContent = `Error: ${error.message}`;
+      alert(`An error occurred while downloading the report: ${error.message}`);
+    });
+}
+
+document.getElementById("downloadButton").addEventListener("click", () => {
+  const reportYear = 2025;
+  const reportMonth = 9;
+  downloadPdfReport(reportYear, reportMonth);
+});

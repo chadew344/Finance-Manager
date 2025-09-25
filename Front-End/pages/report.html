@@ -76,6 +76,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="/pages/what-if-calculator.html" class="nav-link">
+              <i class="fas fa-calculator"></i>
+              <span>What If Calculator</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/pages/setting.html" class="nav-link">
               <i class="fas fa-cog"></i>
               <span>Settings</span>
@@ -91,7 +97,7 @@
         </div>
 
         <div class="sidebar-footer">
-          <a href="#" class="nav-link">
+          <a href="/pages/help.html" class="nav-link">
             <i class="fas fa-question-circle"></i>
             <span>Help & Support</span>
           </a>
@@ -127,9 +133,9 @@
                 <i class="fas fa-lock me-2"></i>Privacy
               </a>
               <div class="dropdown-divider"></div>
-              <a href="#" class="dropdown-item">
+              <button class="dropdown-item" data-logout>
                 <i class="fas fa-sign-out-alt me-2"></i>Logout
-              </a>
+              </button>
             </div>
           </div>
         </header>
@@ -142,10 +148,18 @@
                 Visualize your financial trends and make smarter decisions.
               </p>
             </div>
-            <button class="btn-add d-none" onclick="openModal('add')">
-              <i class="fas fa-plus"></i>
-              Add New Account
-            </button>
+            <div class="container my-3 mx-0">
+              <h4 class="section-header">September Financial Report</h4>
+              <p>
+                Click the button below to get your PDF report for September
+                2025.
+              </p>
+              <button id="downloadButton" class="btn-generate">
+                <i class="fas fa-download"></i>
+                Generate
+              </button>
+              <div id="status-message"></div>
+            </div>
           </div>
 
           <div class="accounts-grid d-flex flex-column" id="accountsGrid">
@@ -503,9 +517,7 @@
                         id="reportCategories"
                         class="form-select"
                         multiple
-                      >
-                        <!-- Category options will be populated dynamically -->
-                      </select>
+                      ></select>
                       <div class="form-help">
                         Hold Ctrl/Cmd to select multiple categories. Leave empty
                         to include all categories.

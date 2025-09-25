@@ -493,29 +493,7 @@ $(document).ready(function () {
   // =================================================================  NOTIFICATION SYSTEM =======================================================
 
   const NotificationManager = {
-    notifications: [
-      {
-        id: 1,
-        message: "Your account balance has been updated",
-        type: "info",
-        time: "2 minutes ago",
-        read: false,
-      },
-      {
-        id: 2,
-        message: "New transaction: $250.00 received",
-        type: "success",
-        time: "5 minutes ago",
-        read: false,
-      },
-      {
-        id: 3,
-        message: "Monthly budget limit reached for dining",
-        type: "warning",
-        time: "1 hour ago",
-        read: false,
-      },
-    ],
+    notifications: [],
 
     init: function () {
       const $notificationList = $("#notificationList");
@@ -785,12 +763,12 @@ $(document).ready(function () {
     },
 
     getUserPlan: function () {
-      return DataManager.get("userPlan") || "free";
+      return DataManager.get("userPlan");
     },
 
     isPremiumUser: function () {
       const plan = this.getUserPlan();
-      return plan === "PERSONAL_PRO" || userPlan === "BUSINESS_PRO";
+      return plan === "PERSONAL_PRO" || plan === "BUSINESS_PRO";
     },
 
     updateNavigationForPlan: function (userPlan) {
@@ -798,13 +776,11 @@ $(document).ready(function () {
       const isPremium =
         userPlan === "PERSONAL_PRO" || userPlan === "BUSINESS_PRO";
 
-      NotificationManager.add(`updateNavigationForPlan:  ${isPremium}`);
-      console.log();
-
       const premiumNavItems = [
         'a[href="/pages/budget.html"]',
         'a[href="/pages/report.html"]',
         'a[href="/pages/analytics.html"]',
+        'a[href="/pages/what-if-calculator.html"]',
       ];
 
       premiumNavItems.forEach((selector) => {
@@ -914,8 +890,10 @@ $(document).ready(function () {
 
     initialize: function (userPlan = null) {
       if (!userPlan) userPlan = this.getUserPlan();
+
       const isPremium =
         userPlan === "PERSONAL_PRO" || userPlan === "BUSINESS_PRO";
+
       this.setUserPlanStatus(isPremium);
       this.updateSidebarBrand(isPremium);
       this.updateUserProfileBadge(isPremium);

@@ -117,12 +117,17 @@ $(document).ready(function () {
         </div>
         <div class="item-stats">
           <div class="stat-item">
-            <div class="stat-value">${category.transactionCount}</div>
+            <div class="stat-value">${
+              category.transactionCount === undefined
+                ? 1
+                : category.transactionCount
+            }</div>
             <div class="stat-label">Transactions</div>
           </div>
           <div class="stat-item">
-            <div class="stat-value">$${Math.abs(
-              category.totalAmount
+            <div class="stat-value">LKR ${Math.abs(
+              // category.totalAmount
+              1000
             ).toLocaleString()}</div>
             <div class="stat-label">Total Amount</div>
           </div>
@@ -172,7 +177,9 @@ $(document).ready(function () {
         </div>
         <div class="item-stats">
           <div class="stat-item">
-            <div class="stat-value">${tag.transactionCount}</div>
+            <div class="stat-value">${
+              tag.transactionCount === undefined ? 4 : tag.transactionCount
+            }</div>
             <div class="stat-label">Transactions</div>
           </div>
           <div class="stat-item">

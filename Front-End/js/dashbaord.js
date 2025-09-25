@@ -61,8 +61,6 @@ async function loadDashboard() {
     userAccountId = DataManager.get("userAccountId");
     planType = DataManager.get("userPlan");
 
-    NotificationManager.add(`PlanType: ${planType}`, "info");
-
     setProfileAvatar(profileInfo);
 
     console.log("Dashboard loaded successfully");
@@ -252,7 +250,6 @@ function createAccountCard(account) {
   `;
 }
 
-// Get account icon based on type
 function getAccountIcon(accountType) {
   const icons = {
     BANK: "fa-university",
@@ -264,7 +261,6 @@ function getAccountIcon(accountType) {
   return icons[accountType] || "fa-wallet";
 }
 
-// Format account type for display
 function formatAccountType(accountType) {
   const types = {
     BANK: "Bank Account",

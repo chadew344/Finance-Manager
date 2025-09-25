@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard FinanceFlow</title>
+  </head>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/css/app.css" />
+  <link rel="stylesheet" href="/css/help.css" />
+  <body>
+    <div class="app-container">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-name">
+            <a href="/pages/dashboard.html"
+              ><i class="fas fa-chart-line me-2 flex-wrap"></i>FinanceFlow<i
+                class="fas fa-crown premium-crown"
+              ></i
+            ></a>
+          </div>
+        </div>
+
+        <ul class="nav-menu">
+          <li class="nav-item">
+            <a href="/pages/dashboard.html" class="nav-link">
+              <i class="fas fa-home"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/financial-account.html" class="nav-link">
+              <i class="fas fa-wallet"></i>
+              <span>Accounts</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/transaction.html" class="nav-link">
+              <i class="fas fa-exchange-alt"></i>
+              <span>Transactions</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/categories-and-tags.html" class="nav-link">
+              <i class="fas fa-layer-group"></i>
+              <span>Categories & Tags</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/budget.html" class="nav-link">
+              <i class="fas fa-chart-pie"></i>
+              <span>Budget</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/analytics.html" class="nav-link">
+              <i class="fas fa-chart-line"></i>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/pages/report.html" class="nav-link">
+              <i class="fas fa-file-invoice"></i>
+              <span>Reports</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/pages/what-if-calculator.html" class="nav-link">
+              <i class="fas fa-calculator"></i>
+              <span>What If Calculator</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="/pages/setting.html" class="nav-link">
+              <i class="fas fa-cog"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="upgrade-container">
+          <a href="/pages/subscription-plans.html" class="btn-upgrade">
+            <i class="fas fa-crown"></i>
+            Upgrade to Premium
+          </a>
+        </div>
+
+        <div class="sidebar-footer">
+          <a href="/pages/help.html" class="nav-link active">
+            <i class="fas fa-question-circle"></i>
+            <span>Help & Support</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="top-bar justify-content-lg-end">
+          <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <div class="user-profile">
+            <span class="premium-badge d-none" id="user-profile-premium-badge">
+              <i class="fas fa-crown"></i>
+              Premium
+            </span>
+            <div class="notification-container">
+              <button class="notification-toggle" id="notificationToggle">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="notificationBadge">3</span>
+              </button>
+
+              <div class="notification-dropdown" id="notificationDropdown">
+                <div class="notification-header">
+                  <h6 class="notification-title">Notifications</h6>
+                  <button class="mark-all-read" id="markAllRead">
+                    Mark all as read
+                  </button>
+                </div>
+
+                <div class="notification-list" id="notificationList">
+                  <!-- Notifications will be populated by JavaScript -->
+                </div>
+
+                <div class="notification-footer">
+                  <a href="#" class="view-all-link">View all notifications</a>
+                </div>
+              </div>
+            </div>
+
+            <button class="theme-toggle" id="themeToggle">
+              <i class="fas fa-moon"></i>
+            </button>
+            <div class="user-avatar">JD</div>
+
+            <div class="dropdown-menu profile-dropdown">
+              <div class="dropdown-header">
+                <div class="user-info">
+                  <div class="user-name">John Doe</div>
+                  <div class="user-email">john.doe@example.com</div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <a href="/pages/user-profile.html" class="dropdown-item">
+                <i class="fas fa-user me-2"></i>Profile
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-cog me-2"></i>Settings
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-lock me-2"></i>Privacy
+              </a>
+              <div class="dropdown-divider"></div>
+              <button class="dropdown-item" data-logout>
+                <i class="fas fa-sign-out-alt me-2"></i>Logout
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div class="content-container w-100 px-lg-5 px-sm-4">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">How to Use FinanceFlow</h1>
+              <p class="page-subtitle">
+                Master your finances with our comprehensive guide to getting the
+                most out of FinanceFlow
+              </p>
+            </div>
+            <button class="btn-add d-none" onclick="openModal('add')">
+              <i class="fas fa-plus"></i>
+              Add New Account
+            </button>
+          </div>
+
+          <div class="accounts-grid d-flex flex-column" id="accountsGrid">
+            <div class="guide-section">
+              <div class="section-header">
+                <div class="section-icon accounts">
+                  <i class="fas fa-rocket"></i>
+                </div>
+                <div>
+                  <h2 class="section-title">Getting Started</h2>
+                  <p class="section-subtitle">
+                    Your journey to financial freedom begins here
+                  </p>
+                </div>
+              </div>
+              <div class="section-content">
+                <p>
+                  Welcome to FinanceFlow! Our application is designed to help
+                  you take complete control of your finances. You can manage all
+                  your transactions, add multiple financial accounts, and track
+                  your spending patterns with powerful analytics.
+                </p>
+
+                <div class="highlight-box">
+                  <strong>First Steps:</strong> Start by adding your financial
+                  accounts (bank accounts, credit cards, savings) and begin
+                  recording your daily transactions. The more data you have, the
+                  better insights you'll get!
+                </div>
+              </div>
+            </div>
+
+            <!-- Accounts Management Section -->
+            <div class="guide-section">
+              <div class="section-header">
+                <div class="section-icon accounts">
+                  <i class="fas fa-university"></i>
+                </div>
+                <div>
+                  <h2 class="section-title">Account Management</h2>
+                  <p class="section-subtitle">
+                    Centralize all your financial accounts
+                  </p>
+                </div>
+              </div>
+              <div class="section-content">
+                <p>
+                  Add all your financial accounts to get a complete picture of
+                  your finances. Whether it's your checking account, savings,
+                  credit cards, or investment accounts - track them all in one
+                  place.
+                </p>
+
+                <ul class="feature-list">
+                  <li>Connect multiple bank accounts and credit cards</li>
+                  <li>Track balances and account details</li>
+                  <li>Monitor account performance over time</li>
+                  <li>
+                    Categorize accounts by type (checking, savings, investment)
+                  </li>
+                </ul>
+
+                <div class="pro-tip">
+                  <strong>Pro Tip:</strong> Set up separate accounts for
+                  different purposes - one for emergency funds, another for
+                  investments, and keep your daily spending account separate.
+                </div>
+              </div>
+            </div>
+
+            <!-- Categories & Tags Section -->
+            <div class="guide-section">
+              <div class="section-header">
+                <div class="section-icon categories">
+                  <i class="fas fa-tags"></i>
+                </div>
+                <div>
+                  <h2 class="section-title">Smart Categorization</h2>
+                  <p class="section-subtitle">
+                    Organize transactions with categories and tags
+                  </p>
+                </div>
+              </div>
+              <div class="section-content">
+                <p>
+                  Effective categorization is key to understanding your spending
+                  patterns. Create custom categories and use specific tags to
+                  differentiate your transactions precisely.
+                </p>
+
+                <h4
+                  style="
+                    color: var(--text-primary-color);
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
+                  "
+                >
+                  Recommended Main Categories:
+                </h4>
+
+                <div class="categories-grid">
+                  <div class="category-card">
+                    <span class="category-icon">🍽️</span>
+                    <div class="category-name">Food & Dining</div>
+                    <div class="category-description">
+                      Restaurants, groceries, takeout
+                    </div>
+                  </div>
+                  <div class="category-card">
+                    <span class="category-icon">🚗</span>
+                    <div class="category-name">Transportation</div>
+                    <div class="category-description">
+                      Gas, public transport, parking
+                    </div>
+                  </div>
+                  <div class="category-card">
+                    <span class="category-icon">🛍️</span>
+                    <div class="category-name">Shopping</div>
+                    <div class="category-description">
+                      Clothing, electronics, gifts
+                    </div>
+                  </div>
+                  <div class="category-card">
+                    <span class="category-icon">🎬</span>
+                    <div class="category-name">Entertainment</div>
+                    <div class="category-description">
+                      Movies, games, subscriptions
+                    </div>
+                  </div>
+                  <div class="category-card">
+                    <span class="category-icon">📄</span>
+                    <div class="category-name">Bills</div>
+                    <div class="category-description">
+                      Utilities, rent, insurance
+                    </div>
+                  </div>
+                </div>
+
+                <div class="highlight-box">
+                  <strong>Tags for Precision:</strong> Use tags to be more
+                  specific within categories. For example, in "Food & Dining"
+                  you might use tags like "breakfast", "lunch", "dinner", or
+                  "healthy" vs "fast-food".
+                </div>
+              </div>
+            </div>
+
+            <!-- Budget Management Section -->
+            <div class="guide-section">
+              <div class="section-header">
+                <div class="section-icon budget">
+                  <i class="fas fa-chart-pie"></i>
+                </div>
+                <div>
+                  <h2 class="section-title">Smart Budgeting</h2>
+                  <p class="section-subtitle">
+                    Plan and track your spending efficiently
+                  </p>
+                </div>
+              </div>
+              <div class="section-content">
+                <p>
+                  Our budgeting system helps you allocate money to different
+                  categories and track your spending against these limits. Set
+                  realistic budgets and monitor your progress throughout the
+                  month.
+                </p>
+
+                <ol class="steps-list">
+                  <li>
+                    <span class="step-counter">1</span>
+                    <div>
+                      <strong>Set Category Budgets:</strong> Allocate specific
+                      amounts to each main category (Food & Dining,
+                      Transportation, etc.) based on your income and priorities.
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-counter">2</span>
+                    <div>
+                      <strong>Track Progress:</strong> Monitor your spending
+                      against budgets in real-time with visual progress bars and
+                      alerts.
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-counter">3</span>
+                    <div>
+                      <strong>Monthly Review:</strong> At month's end, analyze
+                      where you overspent and adjust next month's budget
+                      accordingly.
+                    </div>
+                  </li>
+                </ol>
+
+                <div class="pro-tip">
+                  <strong>Budgeting Rule:</strong> Follow the 50/30/20 rule -
+                  50% for needs, 30% for wants, and 20% for savings and debt
+                  repayment.
+                </div>
+              </div>
+            </div>
+
+            <!-- Goals & Emergency Fund Section -->
+            <div class="guide-section">
+              <div class="section-header">
+                <div class="section-icon goals">
+                  <i class="fas fa-bullseye"></i>
+                </div>
+                <div>
+                  <h2 class="section-title">
+                    Financial Goals & Emergency Fund
+                  </h2>
+                  <p class="section-subtitle">
+                    Build your financial security foundation
+                  </p>
+                </div>
+              </div>
+              <div class="section-content">
+                <p>
+                  Setting and achieving financial goals is crucial for long-term
+                  financial health. Start with building an emergency fund - your
+                  financial safety net.
+                </p>
+
+                <div class="warning-box">
+                  <strong>Priority #1 - Emergency Fund:</strong> Before any
+                  other financial goal, build an emergency fund covering 3-6
+                  months of your essential expenses. This protects you from
+                  unexpected financial shocks.
+                </div>
+
+                <h4
+                  style="
+                    color: var(--text-primary-color);
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
+                  "
+                >
+                  How to Build Your Emergency Fund:
+                </h4>
+
+                <ol class="steps-list">
+                  <li>
+                    <span class="step-counter">1</span>
+                    <div>
+                      <strong>Calculate Monthly Expenses:</strong> Track your
+                      essential monthly expenses (rent, utilities, groceries,
+                      minimum debt payments) for 2-3 months to get an accurate
+                      average.
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-counter">2</span>
+                    <div>
+                      <strong>Set Your Target:</strong> Multiply your monthly
+                      essential expenses by 3-6 (depending on job stability).
+                      This is your emergency fund target.
+                    </div>
+                  </li>
+                  <li>
+                    <span class="step-counter">3</span>
+                    <div>
+                      <strong>Create a Savings Plan:</strong> Set up a monthly
+                      contribution goal and track progress using our goal
+                      tracking feature.
+                    </div>
+                  </li>
+                </ol>
+
+                <div class="highlight-box">
+                  <strong>Goal Examples:</strong> Emergency fund, vacation
+                  savings, house down payment, car replacement fund, retirement
+                  contributions, debt payoff goals.
+                </div>
+              </div>
+            </div>
+
+            <!-- Investment Readiness Section -->
+            <div class="guide-section">
+              <div class="section-header">
+                <div class="section-icon investment">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+                <div>
+                  <h2 class="section-title">Investment Readiness</h2>
+                  <p class="section-subtitle">
+                    When and how to start investing
+                  </p>
+                </div>
+              </div>
+              <div class="section-content">
+                <p>
+                  After tracking your finances for 3-6 months and building your
+                  emergency fund, you'll have a clear picture of your financial
+                  capacity for investments.
+                </p>
+
+                <h4
+                  style="
+                    color: var(--text-primary-color);
+                    margin-top: 2rem;
+                    margin-bottom: 1rem;
+                  "
+                >
+                  Investment Readiness Checklist:
+                </h4>
+
+                <ul class="feature-list">
+                  <li>✅ Emergency fund fully funded (3-6 months expenses)</li>
+                  <li>✅ Consistent monthly surplus after all expenses</li>
+                  <li>✅ 3-6 months of spending data tracked</li>
+                  <li>✅ Stable income and manageable debt levels</li>
+                  <li>✅ Clear understanding of monthly cash flow</li>
+                </ul>
+
+                <div class="pro-tip">
+                  <strong>The Investment Formula:</strong> Once you can
+                  comfortably live off your emergency fund for several months
+                  AND still have money left over each month, you're ready to
+                  explore investment opportunities.
+                </div>
+
+                <div class="highlight-box">
+                  <strong>Our Analytics Help:</strong> Use our spending trends
+                  and income tracking to identify exactly how much you can
+                  safely invest each month without compromising your financial
+                  security.
+                </div>
+              </div>
+            </div>
+
+            <!-- Best Practices Section -->
+            <div class="guide-section">
+              <div class="section-header">
+                <div class="section-icon accounts">
+                  <i class="fas fa-star"></i>
+                </div>
+                <div>
+                  <h2 class="section-title">Best Practices for Success</h2>
+                  <p class="section-subtitle">
+                    Maximize your financial management results
+                  </p>
+                </div>
+              </div>
+              <div class="section-content">
+                <ul class="feature-list">
+                  <li>Record transactions daily or set up automatic imports</li>
+                  <li>Review and categorize transactions weekly</li>
+                  <li>Check budget progress weekly, adjust monthly</li>
+                  <li>Set up alerts for budget limits and goal milestones</li>
+                  <li>
+                    Use the analytics section to identify spending patterns
+                  </li>
+                  <li>
+                    Regular financial reviews - monthly for budgets, quarterly
+                    for goals
+                  </li>
+                  <li>Keep receipts and documentation for tax purposes</li>
+                  <li>Set realistic, achievable financial goals</li>
+                </ul>
+
+                <div class="pro-tip">
+                  <strong>Consistency is Key:</strong> Regular financial
+                  tracking becomes a powerful habit. Even 10 minutes daily can
+                  transform your financial awareness and control.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
