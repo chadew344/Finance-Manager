@@ -195,9 +195,6 @@ $(document).ready(function () {
 
   window.TokenManager = TokenManager;
 
-  // =========================
-  // INITIAL TOKEN HANDLING
-  // =========================
   (async function initToken() {
     const token = TokenManager.getAccessToken();
     if (token) {
@@ -210,7 +207,6 @@ $(document).ready(function () {
         TokenManager.startAutoRefresh();
       } else {
         console.warn("No valid token, user may need to login manually");
-        // optionally show login prompt instead of redirect
       }
     }
   })();
@@ -752,7 +748,6 @@ $(document).ready(function () {
   // ================================================================ SUBSCRIPTION Manager ==============================================================
 
   const SubcriptionManager = {
-    // Your existing methods...
     setUserPlanStatus: function (isPremium) {
       const body = document.body;
       if (isPremium) {
@@ -795,12 +790,16 @@ $(document).ready(function () {
 
     isPremiumUser: function () {
       const plan = this.getUserPlan();
-      return plan === "premium" || plan === "pro";
+      return plan === "PERSONAL_PRO" || userPlan === "BUSINESS_PRO";
     },
 
-    updateNavigationForPlan: function (userPlan = null) {
+    updateNavigationForPlan: function (userPlan) {
       if (!userPlan) userPlan = this.getUserPlan();
-      const isPremium = userPlan === "premium" || userPlan === "pro";
+      const isPremium =
+        userPlan === "PERSONAL_PRO" || userPlan === "BUSINESS_PRO";
+
+      NotificationManager.add(`updateNavigationForPlan:  ${isPremium}`);
+      console.log();
 
       const premiumNavItems = [
         'a[href="/pages/budget.html"]',
@@ -915,7 +914,8 @@ $(document).ready(function () {
 
     initialize: function (userPlan = null) {
       if (!userPlan) userPlan = this.getUserPlan();
-      const isPremium = userPlan === "premium" || userPlan === "pro";
+      const isPremium =
+        userPlan === "PERSONAL_PRO" || userPlan === "BUSINESS_PRO";
       this.setUserPlanStatus(isPremium);
       this.updateSidebarBrand(isPremium);
       this.updateUserProfileBadge(isPremium);

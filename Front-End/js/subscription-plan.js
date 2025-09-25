@@ -1,4 +1,14 @@
+const BASE_URL_PAYMENT = "http://localhost:8080/api/v1/payment";
+
+let payhereData;
+let userAccountId;
+
 $(document).ready(function () {
+  TokenManager.checkAuthentication();
+  SubcriptionManager.initialize();
+  DataManager.setProfileInfo();
+  userAccountId = DataManager.get("userAccountId");
+
   const pricingData = {
     "personal-free": { monthly: 0, yearly: 0 },
     "personal-pro": { monthly: 9, yearly: 7 },
@@ -134,33 +144,9 @@ $(document).ready(function () {
     if (selectedMethod === "payhere") {
       setTimeout(() => {
         $(this).html(originalText);
+        console.log("payment starts with payehre");
 
-        const payment = {
-          sandbox: true,
-          merchant_id: "1232099",
-          return_url: window.location.href,
-          cancel_url: window.location.href,
-          notify_url: "http://sample.com/notify",
-          order_id: "Order-" + Date.now(),
-          items: planName,
-          amount: price + ".00",
-          currency: "LKR",
-          hash: "generated_hash_value",
-          first_name: "John",
-          last_name: "Doe",
-          email: "john@example.com",
-          phone: "+94771234567",
-          address: "No.1, Galle Road",
-          city: "Colombo",
-          country: "Sri Lanka",
-        };
-
-        if (typeof payhere !== "undefined") {
-          payhere.startPayment(payment);
-        } else {
-          alert(`🚀 Redirecting to PayHere for ${planName} - ${price}`);
-          $("#paymentModal").modal("hide");
-        }
+        integratePayhere();
       }, 1500);
     } else if (selectedMethod === "card") {
       const cardForm = $("#cardPaymentForm")[0];
@@ -184,11 +170,108 @@ $(document).ready(function () {
 
       setTimeout(() => {
         $(this).html(originalText);
-        alert(`✅ Payment successful! Welcome to ${planName}!`);
+        upgradePlan();
+
+        AlertManager.confirm(
+          "Upgrade to Personal Pro",
+          `✅ Payment successful! Welcome to ${planName}!`,
+          "success"
+        );
         $("#paymentModal").modal("hide");
       }, 2000);
+
+      window.location.href = "/pages/dashboard.html";
     }
   });
+
+  async function upgradePlan() {
+    console.log("payment backend with payehre");
+
+    try {
+      const response = await window.apiCall(
+        `${BASE_URL_PAYMENT}/upgrade-plan/${userAccountId}`,
+        {
+          method: "POST",
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const apiResponse = await response.json();
+
+      consolelog(apiResponse.data);
+    } catch (error) {
+      console.error("Failed make payment:", error);
+    }
+  }
+
+  async function integratePayhere() {
+    console.log("payment backend with payehre");
+
+    try {
+      const response = await window.apiCall(`${BASE_URL_PAYMENT}/payhere`, {
+        method: "GET",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const apiResponse = await response.json();
+
+      payhereData = apiResponse.data;
+      console.log("Payhere loaded:", apiResponse.message);
+
+      console.log(payhereData);
+      alert(payhereData.hash);
+      initiatePayhereGateway();
+    } catch (error) {
+      console.error("Fetch payhere error:", error);
+    }
+  }
+
+  function initiatePayhereGateway() {
+    payhere.onCompleted = function onCompleted(orderId) {
+      console.log("Payment completed. OrderID:" + orderId);
+    };
+
+    payhere.onDismissed = function onDismissed() {
+      console.log("Payment dismissed");
+    };
+
+    payhere.onError = function onError(error) {
+      console.log("Error:" + error);
+    };
+
+    const payment = {
+      sandbox: true,
+      merchant_id: "1232099",
+      return_url: window.location.href,
+      cancel_url: window.location.href,
+      notify_url: "http://sample.com/notify",
+      order_id: payhereData.orderId,
+      items: payhereData.subscriptionPackage,
+      amount: payhereData.amount,
+      currency: payhereData.currency,
+      hash: payhereData.hash,
+      first_name: payhereData.firstName,
+      last_name: payhereData.lastName,
+      email: payhereData.email,
+      phone: payhereData.phoneNumber,
+      address: payhereData.address,
+      city: payhereData.city,
+      country: "Sri Lanka",
+    };
+
+    if (typeof payhere !== "undefined") {
+      payhere.startPayment(payment);
+    } else {
+      alert(`🚀 Redirecting to PayHere for ${planName} - ${price}`);
+      $("#paymentModal").modal("hide");
+    }
+  }
 
   $(document).on(
     "input",

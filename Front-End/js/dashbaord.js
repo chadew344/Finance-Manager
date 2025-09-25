@@ -1,7 +1,7 @@
 const BASE_URL_DASHBOARD = "http://localhost:8080/api/v1/dashboard";
 
 let userAccountId;
-let isPremium = true;
+let planType = "PERSONAL_FREE";
 
 $(document).ready(function () {
   TokenManager.checkAuthentication();
@@ -49,16 +49,19 @@ async function loadDashboard() {
       firstName: userInfo.firstName,
       lastName: userInfo.lastName,
       email: userInfo.email,
+      plan: userInfo.plan,
     };
 
     DataManager.set("userAccountId", userInfo.userAccountId);
     DataManager.set("firstName", userInfo.firstName);
     DataManager.set("lastName", userInfo.lastName);
     DataManager.set("email", userInfo.email);
-    DataManager.set("userPlan", "premium");
+    DataManager.set("userPlan", userInfo.plan);
 
     userAccountId = DataManager.get("userAccountId");
-    isPremium = DataManager.get("userPlan") === "premium" ? true : false;
+    planType = DataManager.get("userPlan");
+
+    NotificationManager.add(`PlanType: ${planType}`, "info");
 
     setProfileAvatar(profileInfo);
 
@@ -97,7 +100,7 @@ function updatePageTitle(lastName) {
     const titleText = "Welcome " + lastName;
     pageTitle.text(titleText);
 
-    if (isPremium) {
+    if (planType !== "PERSONAL_FREE") {
       const crown = $('<i class="fas fa-crown premium-crown"></i>');
       pageTitle.append(crown);
     }
