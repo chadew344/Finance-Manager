@@ -54,8 +54,7 @@ public class User extends BaseEntity implements UserDetails {
 
     private boolean emailVerified;
 
-    @Column(nullable = false)
-    private Boolean isActive = true;
+    private boolean isActive;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonManagedReference

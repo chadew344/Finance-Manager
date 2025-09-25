@@ -29,6 +29,7 @@ public class SecurityConfig {
     private static final String[] PUBLIC_URLS = {
             "/auth/**",
             "/payment/**",
+            "/subscription/**",
             "/ws/**",
             "/swagger-ui/**",
             "/v3/api-docs/**"
@@ -59,7 +60,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(
-                List.of("http://127.0.0.1:5500", "http://localhost:5500")
+                List.of("http://127.0.0.1:5500", "http://localhost:5500",  "http://127.0.0.1:5501", "http://127.0.0.1:5502")
         );
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));

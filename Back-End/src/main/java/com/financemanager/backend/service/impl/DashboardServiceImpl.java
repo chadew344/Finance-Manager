@@ -3,11 +3,10 @@ package com.financemanager.backend.service.impl;
 import com.financemanager.backend.dto.dashboard.DashboardResponse;
 import com.financemanager.backend.dto.dashboard.FinancialAccountSummaryDto;
 import com.financemanager.backend.dto.dashboard.LatestTransactionResponse;
-import com.financemanager.backend.entity.FinancialAccount;
-import com.financemanager.backend.entity.Transaction;
-import com.financemanager.backend.entity.User;
-import com.financemanager.backend.entity.UserAccount;
+import com.financemanager.backend.entity.*;
 import com.financemanager.backend.enumeration.SharedUserRole;
+import com.financemanager.backend.enumeration.SubscriptionPlanType;
+import com.financemanager.backend.enumeration.SubscriptionStatus;
 import com.financemanager.backend.exception.BusinessException;
 import com.financemanager.backend.exception.ErrorCode;
 import com.financemanager.backend.repository.*;
@@ -19,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +27,8 @@ public class DashboardServiceImpl implements DashboardService {
     private final UserRepository userRepository;
     private final SharedAccountUserRepository  sharedAccountUserRepository;
     private final TransactionRepository transactionRepository;
-    private final UserAccountRepository userAccountRepository;
     private final FinancialAccountRepository financialAccountRepository;
+    private final UserSubscriptionRepository userSubscriptionRepository;
 
     @Override
     public DashboardResponse getUserData(String currentUserEmail){
@@ -37,21 +37,29 @@ public class DashboardServiceImpl implements DashboardService {
 
         Long userAccountID = getUserAccount(user.getId(), SharedUserRole.OWNER);
 
+        SubscriptionPlanType planType = getActiveSubscriptionPlanType(userAccountID);
+
         return DashboardResponse.builder()
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .email(user.getEmail())
+                .plan(planType)
                 .userAccountId(userAccountID)
                 .build();
     }
-
-
 
     private Long getUserAccount(Long userId, SharedUserRole role){
         UserAccount userAccount = sharedAccountUserRepository.findUserAccountByRoleAndUserId(role, userId)
                 .orElseThrow(() -> new BusinessException(ErrorCode.USER_ACCOUNT_NOT_FOUND, "User account not found"));
 
         return userAccount.getId();
+    }
+
+    public SubscriptionPlanType getActiveSubscriptionPlanType(Long userAccountId) {
+        Optional<UserSubscription> activeSubscription = userSubscriptionRepository
+                .findByUserAccountIdAndStatus(userAccountId, SubscriptionStatus.ACTIVE);
+        return activeSubscription.map(userSubscription -> userSubscription.getSubscriptionPlan().getType())
+                .orElseThrow(() -> new BusinessException(ErrorCode.SUBSCRIPTION_PLAN_NOT_FOUND, "Subscription Plan not found"));
     }
 
     @Override

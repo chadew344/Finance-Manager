@@ -1,5 +1,6 @@
 package com.financemanager.backend.dto.auth.request;
 
+import com.financemanager.backend.enumeration.SubscriptionPlanType;
 import com.financemanager.backend.enumeration.UserAccountType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -31,4 +32,7 @@ public class RegistrationRequest {
 
     @NotNull(message = "User account type is required.")
     private UserAccountType userAccountType;
+
+    @NotNull(message = "Subscription plan is required.")
+    private SubscriptionPlanType subscriptionPlanType;
 }

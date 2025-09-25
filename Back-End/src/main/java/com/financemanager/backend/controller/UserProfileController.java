@@ -1,10 +1,14 @@
 package com.financemanager.backend.controller;
 
+import com.financemanager.backend.dto.auth.reponse.AuthenticationResponse;
+import com.financemanager.backend.dto.auth.request.AuthenticationRequest;
+import com.financemanager.backend.util.APIResponse;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/profile")
@@ -12,4 +16,5 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 public class UserProfileController {
+
 }

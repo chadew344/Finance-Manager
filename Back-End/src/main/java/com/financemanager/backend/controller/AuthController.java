@@ -20,7 +20,6 @@ import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin()
@@ -34,7 +33,7 @@ public class AuthController {
     private long refreshTokenExpiration;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<APIResponse<AuthenticationResponse>> authenticate( @RequestBody AuthenticationRequest request, HttpServletResponse response) {
+    public ResponseEntity<APIResponse<AuthenticationResponse>> authenticate(@Valid @RequestBody AuthenticationRequest request, HttpServletResponse response) {
         AuthenticationResponse tokens = authService.authenticate(request);
         createCookie(tokens, response);
         return  ResponseEntity.ok(new APIResponse<>(
@@ -91,10 +90,8 @@ public class AuthController {
 
         try {
             final String newAccessToken = jwtService.refreshAccessToken(refreshToken);
-            // Implement token rotation here by generating a new refresh token
 //            final String newRefreshToken = jwtService.generateRefreshToken(jwtService.extractUsername(refreshToken));
 
-            // Create the new HttpOnly cookie for the new refresh token
             final ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
                     .httpOnly(true)
                     .secure(false)

@@ -2,10 +2,7 @@ package com.financemanager.backend.entity;
 
 import com.financemanager.backend.enumeration.SubscriptionStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -15,6 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 
+@Builder
 @Entity
 public class UserSubscription extends BaseEntity {
     @Id
@@ -29,14 +27,14 @@ public class UserSubscription extends BaseEntity {
     @JoinColumn(name = "subscription_plan_id", nullable = false)
     private SubscriptionPlan subscriptionPlan;
 
+    private LocalDateTime startTime;
+
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private SubscriptionStatus status; // 'active', 'expired', 'cancelled'
+    private SubscriptionStatus status;
 
-    @Column(name = "is_current", nullable = false)
-    private Boolean isCurrent;
 }
 

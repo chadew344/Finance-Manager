@@ -32,8 +32,9 @@ public enum ErrorCode {
 
     UNAUTHORIZED_ACCESS("UNAUTHORIZED_ACCESS", "Unauthorized access" , UNAUTHORIZED ),
 
-    INVALID_PHONE_NUMBER("INVALID_PHONE_NUMBER", "Invalid phone number" , BAD_REQUEST ),;
+    INVALID_PHONE_NUMBER("INVALID_PHONE_NUMBER", "Invalid phone number" , BAD_REQUEST ),
 
+    SUBSCRIPTION_PLAN_NOT_FOUND("SUBSCRIPTION_PLAN_NOT_FOUND", "Subscription Plan not found" , NOT_FOUND ),;
 
 
     private final String code;

@@ -2,6 +2,7 @@ package com.financemanager.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.financemanager.backend.enumeration.SharedUserRole;
+import com.financemanager.backend.enumeration.UserStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,10 @@ public class SharedAccountUser extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SharedUserRole role; // 'OWNER', 'MEMBER'
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_account_id", nullable = false)

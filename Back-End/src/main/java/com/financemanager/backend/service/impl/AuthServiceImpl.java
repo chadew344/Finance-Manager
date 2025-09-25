@@ -4,15 +4,13 @@ import com.financemanager.backend.dto.PhoneNumberDto;
 import com.financemanager.backend.dto.auth.reponse.AuthenticationResponse;
 import com.financemanager.backend.dto.auth.request.AuthenticationRequest;
 import com.financemanager.backend.dto.auth.request.RegistrationRequest;
-import com.financemanager.backend.entity.SharedAccountUser;
-import com.financemanager.backend.entity.User;
-import com.financemanager.backend.entity.UserAccount;
+import com.financemanager.backend.entity.*;
 import com.financemanager.backend.enumeration.SharedUserRole;
+import com.financemanager.backend.enumeration.SubscriptionStatus;
+import com.financemanager.backend.enumeration.UserStatus;
 import com.financemanager.backend.exception.BusinessException;
 import com.financemanager.backend.exception.ErrorCode;
-import com.financemanager.backend.repository.SharedAccountUserRepository;
-import com.financemanager.backend.repository.UserAccountRepository;
-import com.financemanager.backend.repository.UserRepository;
+import com.financemanager.backend.repository.*;
 import com.financemanager.backend.security.JwtService;
 import com.financemanager.backend.service.AuthService;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
@@ -28,6 +26,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -35,6 +35,8 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final UserAccountRepository userAccountRepository;
     private final SharedAccountUserRepository sharedAccountUserRepository;
+    private final SubscriptionPlanRepository subscriptionPlanRepository;
+    private final UserSubscriptionRepository userSubscriptionRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -53,8 +55,7 @@ public class AuthServiceImpl implements AuthService {
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                // .role(Role.USER)
-                .isActive(true)
+                .phone(request.getPhoneNumber())
                 .build();
 
         userRepository.save(user);
@@ -68,10 +69,25 @@ public class AuthServiceImpl implements AuthService {
         userAccount =  userAccountRepository.save(userAccount);
         log.debug("UserAccount created with id: {} for email: {}", userAccount.getId(), user.getEmail());
 
+        SubscriptionPlan defaultPlan = subscriptionPlanRepository.findByType(request.getSubscriptionPlanType())
+                .orElseThrow(() -> new BusinessException(ErrorCode.SUBSCRIPTION_PLAN_NOT_FOUND));
+
+        UserSubscription subscription = new UserSubscription();
+        subscription.setUserAccount(userAccount);
+        subscription.setSubscriptionPlan(defaultPlan);
+        subscription.setStartTime(LocalDateTime.now());
+        subscription.setEndDate(LocalDateTime.now().plusMonths(1));
+        subscription.setStatus(SubscriptionStatus.ACTIVE);
+
+        userSubscriptionRepository.save(subscription);
+        log.debug("UserSubscription created for account id: {} with plan: {}", userAccount.getId(), defaultPlan.getName());
+
+
         SharedAccountUser sharedAccountUser  = new SharedAccountUser();
         sharedAccountUser.setUserAccount(userAccount);
         sharedAccountUser.setUser(user);
         sharedAccountUser.setRole(SharedUserRole.OWNER);
+        sharedAccountUser.setStatus(UserStatus.ACTIVE);
 
         sharedAccountUserRepository.save(sharedAccountUser);
         log.debug("SharedAccountUser mapping created for user: {} with accountId: {}", user.getEmail(), userAccount.getId());

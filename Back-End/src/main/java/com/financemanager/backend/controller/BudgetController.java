@@ -2,7 +2,9 @@ package com.financemanager.backend.controller;
 
 import com.financemanager.backend.dto.budget.BudgetDto;
 import com.financemanager.backend.dto.budget.BudgetOverviewDto;
+import com.financemanager.backend.dto.budget.BudgetSummeryDto;
 import com.financemanager.backend.service.BudgetService;
+import com.financemanager.backend.util.APIResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +44,15 @@ public class BudgetController {
     public ResponseEntity<BudgetOverviewDto> getBudgetOverview(@PathVariable Long id) {
         BudgetOverviewDto overview = budgetService.getBudgetOverview(id, 1L);
         return ResponseEntity.ok(overview);
+    }
+
+    @GetMapping("/summery/{userAccountId}")
+    public ResponseEntity<APIResponse<BudgetSummeryDto>> getBudgetSummery(@PathVariable Long userAccountId) {
+        BudgetSummeryDto summery = budgetService.getBudgetSummery(userAccountId);
+        return ResponseEntity.ok(new APIResponse<>(
+                200,
+                "OK",
+                summery
+        ));
     }
 }

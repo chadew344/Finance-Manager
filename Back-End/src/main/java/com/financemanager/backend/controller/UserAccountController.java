@@ -1,12 +1,18 @@
 package com.financemanager.backend.controller;
 
 import com.financemanager.backend.dto.UserAccountDto;
+import com.financemanager.backend.dto.auth.reponse.AuthenticationResponse;
+import com.financemanager.backend.dto.invitation.EmailCheckRequest;
+import com.financemanager.backend.dto.invitation.InvitationRequest;
+import com.financemanager.backend.dto.userAccount.InitUserManageResponse;
 import com.financemanager.backend.service.UserAccountService;
 import com.financemanager.backend.util.APIResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -17,20 +23,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 public class UserAccountController {
-
     private final UserAccountService userAccountService;
-
-    @PostMapping
-    public ResponseEntity<APIResponse<UserAccountDto>> create(@RequestBody UserAccountDto userAccountDto) {
-        UserAccountDto createdAccount = userAccountService.create(userAccountDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                new APIResponse<>(
-                        HttpStatus.CREATED.value(),
-                        "User account created successfully.",
-                        createdAccount
-                )
-        );
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<APIResponse<UserAccountDto>> findById(@PathVariable Long id) {
@@ -86,4 +79,37 @@ public class UserAccountController {
                 )
         );
     }
+
+    @GetMapping("/user-manager/{userAccountId}")
+    public ResponseEntity<APIResponse<InitUserManageResponse>> multiUserMange(@PathVariable Long userAccountId) {
+        return  ResponseEntity.ok(new APIResponse<>(
+                200,
+                "OK",
+                userAccountService.initUserManage(userAccountId)
+        ));
+    }
+
+
+    @PostMapping("/invite-user")
+    public ResponseEntity<APIResponse<String>> inviteUSer(@RequestBody InvitationRequest invitationRequest, @AuthenticationPrincipal UserDetails userDetails) {
+        String senderEmail = userDetails.getUsername();
+        return  ResponseEntity.ok(new APIResponse<>(
+                200,
+                "OK",
+                userAccountService.inviteUser(invitationRequest, senderEmail)
+        ));
+
+    }
+
+    @PostMapping("/check-email")
+    public ResponseEntity<APIResponse<Boolean>> checkEmail(@RequestBody EmailCheckRequest request) {
+        return  ResponseEntity.ok(new APIResponse<>(
+                200,
+                "OK",
+                userAccountService.checkEmail(request.getEmail())
+        ));
+
+    }
+
+
 }

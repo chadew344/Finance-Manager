@@ -14,19 +14,17 @@ import java.time.LocalDateTime;
 @Builder
 
 @Entity
-public class Budget extends BaseEntity {
+public class FinancialGoal extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String name;
 
-    @Column(nullable = false)
-    private BigDecimal amount;
+    private BigDecimal targetAmount;
 
-    @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
+    private BigDecimal currentAmount;
 
-    @Column(name = "end_date", nullable = false)
-    private LocalDateTime endDate;
+    private LocalDateTime deadline;
 
     @ManyToOne
     @JoinColumn(name = "user_account_id", nullable = false)

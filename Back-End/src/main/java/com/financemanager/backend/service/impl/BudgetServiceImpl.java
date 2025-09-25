@@ -2,6 +2,7 @@ package com.financemanager.backend.service.impl;
 
 import com.financemanager.backend.dto.budget.BudgetDto;
 import com.financemanager.backend.dto.budget.BudgetOverviewDto;
+import com.financemanager.backend.dto.budget.BudgetSummeryDto;
 import com.financemanager.backend.service.BudgetService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,11 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public BudgetOverviewDto getBudgetOverview(Long budgetId, Long userId) {
+        return null;
+    }
+
+    @Override
+    public BudgetSummeryDto getBudgetSummery(Long userAccountId) {
         return null;
     }
 }

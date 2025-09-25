@@ -1,5 +1,6 @@
 package com.financemanager.backend.entity;
 
+import com.financemanager.backend.enumeration.InvitationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class Invitation extends BaseEntity {
     private String invitedEmail;
 
     @Column(nullable = false)
-    private String status; // 'pending', 'accepted', 'revoked', 'expired'
+    private InvitationStatus status;// 'pending', 'accepted', 'revoked', 'expired'
 
     @Column(name = "expires_at", nullable = false)
     private LocalDateTime expiresAt;

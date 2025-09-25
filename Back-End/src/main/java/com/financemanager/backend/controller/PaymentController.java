@@ -1,12 +1,16 @@
 package com.financemanager.backend.controller;
 
 import com.financemanager.backend.dto.payment.PayhereInitResponse;
+import com.financemanager.backend.dto.payment.PaymentDto;
+import com.financemanager.backend.entity.UserSubscription;
 import com.financemanager.backend.service.PaymentService;
 import com.financemanager.backend.util.APIResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -19,13 +23,26 @@ import java.util.Map;
 public class PaymentController {
     private final PaymentService paymentService;
 
+    @PostMapping("/upgrade-plan/{userAccountId}")
+    public ResponseEntity<APIResponse<PaymentDto>> upgradePlan(@PathVariable Long userAccountId, @AuthenticationPrincipal UserDetails userDetails) {
+        String email = userDetails.getUsername();
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                new APIResponse<>(
+                        HttpStatus.OK.value(),
+                        "Payment Successful and plan upgraded",
+                        paymentService.upgradePlan(userAccountId, email)
+                )
+        );
+    }
+
     @GetMapping("/payhere")
-    public ResponseEntity<APIResponse<PayhereInitResponse>> payWithPayhere(){
+    public ResponseEntity<APIResponse<PayhereInitResponse>> payWithPayhere(@AuthenticationPrincipal UserDetails userDetails){
+        String email = userDetails.getUsername();
        return ResponseEntity.status(HttpStatus.OK).body(
                 new APIResponse<>(
                         HttpStatus.OK.value(),
                         "Initiate Payhere Gateway",
-                        paymentService.initiatePayherePayment()
+                        paymentService.initiatePayherePayment(email)
                 )
         );
 
@@ -39,13 +56,8 @@ public class PaymentController {
             return ResponseEntity.badRequest().body("Payment token is missing.");
         }
 
-        // For testing, you only need to check the token structure and simulate a success.
-        // In a real application, you would pass this token to your payment gateway's API.
-
-        // Log the token to see what it looks like
         System.out.println("Received Google Pay token: " + token);
 
-        // You can add a simple check to make sure the token isn't empty
         if (token.startsWith("{")) {
             System.out.println("Token format seems correct. Simulating successful payment...");
             return ResponseEntity.ok("Payment test successful. Token received and validated.");
