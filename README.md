@@ -35,9 +35,9 @@ Finance Manager is a comprehensive financial management solution designed for bo
 <img height="400px" src="/screeenshots/finance-manager-ui-1.png" width="700px"/>
 
 ### Signup and SignIn
-<img height="400px" src="/screeenshots/finance-manager-ui-2.png" width="700px"/>
-<img height="400px" src="/screeenshots/finance-manager-ui-3.png" width="700px"/>
-<img height="400px" src="/screeenshots/finance-manager-ui-4.png" width="700px"/>
+<img height="929" src="/screeenshots/finance-manager-ui-2.png" width="1859" alt=""/>
+<img height="929" src="/screeenshots/finance-manager-ui-3.png" width="1859" alt=""/>
+<img height="929" src="/screeenshots/finance-manager-ui-4.png" width="1859" alt=""/>
 
 ### Dashboard Free plan
 *Free dashboard provides simple overview of the account*
@@ -173,12 +173,12 @@ Before running the application, ensure you have the following installed:
    mvn clean install
    ```
 
-5. **Run database migrations**
+7. **Run database migrations**
    ```bash
    mvn flyway:migrate
    ```
 
-7. **Start the backend server**
+8. **Start the backend server**
    ```bash
    mvn spring-boot:run
    ```
@@ -192,42 +192,28 @@ Before running the application, ensure you have the following installed:
    cd ../frontend
    ```
 
-2. **Install frontend dependencies** (if using npm for asset management)
-   ```bash
-   npm install
-   ```
+2. **Serve the frontend**
 
-3. **Configure API endpoints**
-   ```bash
-   # Edit the configuration file
-   nano js/config.js
-   ```
+   Since this is a static HTML/CSS/JS application, you can serve it using any of these methods:
 
-   Update the API base URL:
-   ```javascript
-   const CONFIG = {
-       API_BASE_URL: 'http://localhost:8080/api',
-       WEBSOCKET_URL: 'ws://localhost:8080/ws'
-   };
-   ```
-
-4. **Serve the frontend**
-   You can serve the frontend using any of these methods:
-
-   **Option A: Using a simple HTTP server**
-   ```bash
-   # Using Python 3
-   python -m http.server 3000
+   **Option A: Using Live Server** (VS Code extension)
+   - Install Live Server extension in VS Code
+   - Right-click on `index.html` and select "Open with Live Server"
    
-   # Using Node.js http-server
-   npx http-server -p 3000
+   **Option B: Using any local web server**
+   ```bash
+    # If you have Node.js installed (optional)
+    npx http-server -p 3000
+      
+    # Or simply open index.html directly in your browser
+    # Note: Some features may require a local server due to CORS policies
    ```
+   
+   **Option C: Direct file opening**
+   - You can also directly open `index.html` in your browser
+   - However, using a local server is recommended for full functionality
 
-   **Option B: Using Live Server (VS Code extension)**
-    - Install Live Server extension in VS Code
-    - Right-click on `index.html` and select "Open with Live Server"
-
-   The frontend will be available at `http://localhost:3000`
+  
 
 ### Database Setup
 
@@ -242,14 +228,7 @@ Before running the application, ensure you have the following installed:
    ```
 
 2. **Create database**
-   ```sql
-   mysql -u root -p
-   CREATE DATABASE finance_manager;
-   CREATE USER 'finance_user'@'localhost' IDENTIFIED BY 'your_password';
-   GRANT ALL PRIVILEGES ON finance_manager.* TO 'finance_user'@'localhost';
-   FLUSH PRIVILEGES;
-   EXIT;
-   ```
+   - Database schema will create when you run the program
 
 ### Email Configuration (for invitations)
 
@@ -263,9 +242,9 @@ Before running the application, ensure you have the following installed:
 
 ### PayHere Payment Gateway Setup
 
-1. **Create PayHere Account**
-    - Sign up at [PayHere](https://www.payhere.lk/)
-    - Get your Merchant ID and Merchant Secret from the dashboard
+1. **Create PayHere Sandbox Account**
+    - Sign up at [PayHere](https://sandbox.payhere.lk/merchant/sign-up)
+    - Get your Merchant ID and Merchant Secret from the Integrations section
 
 2. **Configure PayHere**
     - Add your `PAYHERE_MERCHANT_ID` and `PAYHERE_MERCHANT_SECRET` to `.env`
@@ -315,14 +294,16 @@ The application uses environment variables for sensitive data. You need to creat
    mvn spring-boot:run
    ```
 
-2. **Start the frontend server** (in a new terminal)
+2. **Start the frontend server** 
    ```bash
    cd frontend
-   python -m http.server 3000
+   # Open index.html with Live Server in VS Code
+   # OR use any local web server
+   # OR simply open index.html in your browser
    ```
 
 3. **Access the application**
-    - Open your browser and navigate to `http://localhost:3000`
+    - Open your browser and navigate to `http://localhost:3000` or  `http://localhost:5000` (Live Server)
     - The application should load and connect to the backend API
 
 ### Troubleshooting
@@ -351,4 +332,4 @@ The application uses environment variables for sensitive data. You need to creat
 - Thanks to the Spring Boot community for excellent documentation
 - Chart.js team for the amazing charting library
 - Bootstrap team for the responsive framework
-- Payhere sanbox testing for the developets
+- Payhere sandbox testing for the developers
